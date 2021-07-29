@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core'
 import createPalette from '@material-ui/core/styles/createPalette';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import "./footer.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,25 +36,34 @@ function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h4>We build other things too</h4>
+                        <h4>We build other things too!</h4>
+                        
+                    </div>
+                    <div className="col">
                         <form className={classes.root} noValidate autoComplete="off">
-                            <TextField id="outlined-basic"
-                            className="input" 
-                            label="Your Email" 
-                            variant="filled"
-                            size="small" 
+                            <div>
+                            <TextField
+                            label="Your Email"
+                            id="outlined-size-small"
+                            variant="outlined"
+                            size="small"
                             color="secondary"
                             />
+                            </div>
+                            <Button color="secondary" size="small">Secondary</Button>
                         </form>
                     </div>
                     <div className="col">
-                        <a href="/">Home</a>
-                        <a href="/">About</a>
+                    
                     </div>
                     <div className="col">
                         <ul className="footer-list">
-                        <li><a href="/">How to Play</a></li>
-                        <a href="/">Contact</a>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/">About</a></li>
+                        </ul>
+                        <ul className="footer-list">
+                            <li><a href="/">How to Play</a></li>
+                            <li><a href="/">Contact</a></li>
                         </ul>
                     </div>
                 </div>
