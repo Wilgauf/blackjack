@@ -33,25 +33,32 @@ def create_new_game(request):
     if check_hand(player_hand) == 'blackjack':
         blackjack = 'P'
 
+    if check_hand(dealer_hand) == 'blackjack':
+        blackjack = 'D'
+
+
     request.data.update({
         'deck_id': deck_id,
         'player_hand': player_hand,
         'dealer_hand': dealer_hand,
         'player_chips': player_chips
     })
+
+    if blackjack:
+        request.data.update(
+            'blackjack': blackjack,
+        )
     return request
-#parses and computes value of given hand. Will return 'blackjack', 'bust', or the hand value. 
+
+
+#parses and computes value of given hand. Will return the hand value as <int>. 
 def check_hand(cards):
     card_values = []
-    for i, card in enumerate(sorted(cards, reverse=True)):
-        if i == 0 and card[0] == 'A':
-            card_values.append(11)
-        card_values.append(card_key[card[0]])
-    hand_value = sum(card_values)
-    if hand_value > 21:
-        return 'bust'
-    elif hand_value == 21:
-        return 'blackjack'
+    hand_value = 0
+    for _, card in enumerate(cards):
+        if card[0] == 'A' and hand_value <= 10:
+            hand_value += 1
+        hand_value += card_key[card[0]]
     
     return hand_value
         
