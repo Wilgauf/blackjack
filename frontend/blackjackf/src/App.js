@@ -10,18 +10,18 @@ import LandingPage from './pages/LandingPage';
 import GameboardPage from './pages/GameboardPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar/>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/gameboard" component={GameboardPage} />
         <Route exact path="/contact" component={ContactPage} />
-        <Navbar/>
-        <h1>Test</h1>
+        <Footer/>
       </Router>
     </div>
   );
