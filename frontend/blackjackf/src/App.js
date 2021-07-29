@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import GameboardPage from './pages/GameboardPage';
 import AboutPage from './pages/AboutPage';
@@ -20,6 +20,8 @@ function App() {
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/gameboard" component={GameboardPage} />
         <Route exact path="/contact" component={ContactPage} />
+        <Navbar/>
+        <h1>Test</h1>
       </Router>
     </div>
   );
