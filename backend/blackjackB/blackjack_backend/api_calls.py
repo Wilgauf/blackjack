@@ -9,9 +9,25 @@ def create_a_deck():
     else:
         print("Request Failed with not ok status")
 
-deck_id = create_a_deck()
-defaultURL = defaultURL+deck_id+"/"
-print(deck_id)
+# deck_id = create_a_deck()
+# defaultURL = defaultURL+deck_id+"/"
+# print(deck_id)
+
+#draws given number of cards. Creates new deck and draws cards if deck_id=new
+def draw_card(deck_id, num=1):
+    response = requests.get(f'{defaultURL}{deck_id}/draw/?count={num}')
+    if response.json()["success"]:
+        deck = response.json()["deck_id"]
+        this_hand = []
+        for card in response.json()["cards"]:
+            this_hand.append(card["code"])
+        if deck_id == 'new':
+            data = {f'deck_id': {deck}, 'cards' : {this_hand}}
+        else :
+            data = this_hand
+        return data
+    else:
+        print("Response error, retry request")
 
 #Next we need to draw cards from the deck and then set them to the respective hand
 def deal_a_hand(player_name="Wilson"):
