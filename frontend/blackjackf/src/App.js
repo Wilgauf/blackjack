@@ -10,7 +10,7 @@ import LandingPage from './pages/LandingPage';
 import GameboardPage from './pages/GameboardPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/gameboard" component={GameboardPage} />
         <Route exact path="/contact" component={ContactPage} />
-        
+        <Footer/>
       </Router>
     </div>
   );
