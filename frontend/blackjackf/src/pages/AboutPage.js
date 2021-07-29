@@ -1,9 +1,12 @@
 import React from 'react';
 
+
 const AboutPage = () => {
   return (
     <div>
-      <h1>About</h1>
+      <div>
+        <img source src={require("../images/blackjackBanner.jpeg").default} className="about-top-banner" />       
+      </div>
     </div>
   );
 };
