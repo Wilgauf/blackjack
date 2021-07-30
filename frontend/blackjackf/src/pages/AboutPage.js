@@ -5,7 +5,7 @@ const AboutPage = () => {
   return (
     <div>
       <div>
-        <img source src={require("../images/blackjackBanner.jpeg").default} className="about-top-banner" />       
+        <img source src={require("../images/blackjackBanner.jpeg").default} className="about-top-banner" alt="" />       
       </div>
       <div className="about-body-container">
         <h1>About</h1>
@@ -17,7 +17,7 @@ const AboutPage = () => {
         </p>
       </div>
       <div>
-        <img source src={require("../images/blackjackTable.jpeg").default} className="about-bottom-banner" /> 
+        <img source src={require("../images/blackjackTable.jpeg").default} className="about-bottom-banner" alt=""/> 
       </div>
     </div>
   );
