@@ -2,12 +2,66 @@ html {
   background-color: #171A29;
 }
 
-h1 {
+h1, p {
   color: white;
 }
 
+h3 {
+  color: #7A9EB4;
+}
 
+/* LANDING PAGE */
 
+.hero-section {
+  color:white;
+  background: url(images/CityPicture.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
+/* ABOUT PAGE */
 
+.about-top-banner {
+  width: 100vw;
+  height: 300px;
+}
 
+.about-bottom-banner {
+  width: 100vw;
+  height: 300px;
+}
+.about-body-container {
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+}
+
+.about-body-paragraph {
+  width: 30%;
+}
+
+/* HOW TO PLAY PAGE */
+
+.howtoplay-top-banner {
+width: 100vw;
+height: 300px;
+}
+
+.howtoplay-bottom-banner {
+width: 100vw;
+height: 300px;
+}
+
+.howtoplay-body-container {
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+}
+
+.howtoplay-body-paragraph {
+  width: 30%;
+}
