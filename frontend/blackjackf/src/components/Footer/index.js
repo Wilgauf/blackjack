@@ -50,7 +50,7 @@ function Footer() {
                             color="secondary"
                             />
                             </div>
-                            <Button color="secondary" size="small">Secondary</Button>
+                            <Button color="secondary" size="small">Submit</Button>
                         </form>
                     </div>
                     <div className="col">
@@ -59,11 +59,11 @@ function Footer() {
                     <div className="col">
                         <ul className="footer-list">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/">About</a></li>
+                            <li><a href="/about">About</a></li>
                         </ul>
                         <ul className="footer-list">
                             <li><a href="/">How to Play</a></li>
-                            <li><a href="/">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>

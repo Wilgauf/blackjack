@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
-import GameboardPage from './pages/GameboardPage';
-import AboutPage from './pages/AboutPage';
+import GameboardPage from './pages/Gameboard/GameboardPage';
+import AboutPage from './pages/About/AboutPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 
