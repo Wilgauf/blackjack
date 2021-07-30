@@ -1,0 +1,5 @@
+ const aboutText1 = `Based on ‘21’, a popular card game from the 18th century, much loved in particular by Madame du Barry and later by Napoleon, who played it to pass the time while in exile on St. Helena, Blackjack became popular across the pond after the French Revolution. It became popular in American gambling circles where bonuses were invented to keep players playing. If your first two cards were the jack of spades and an ace, you got an extra payout. Hence the name Blackjack. These bonuses don’t exist any more, but the principle remains the same. The name of the game is to beat the Bank, in the person of the Dealer, without exceeding 21. Otherwise you lose your bet. If you reach a Blackjack (21) your bet is multiplied by 3. If you beat the Dealer without reaching 21, you win double your bet.` 
+
+const aboutText2 = `Although luck determines the hand you’re dealt, strategy has its role to play too. Depending on the hands of the other players and of the Bank, an informed player will know whether it’s wise to take another card, stop, or keep playing. `
+
+export {aboutText1, aboutText2}

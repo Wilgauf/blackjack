@@ -1,0 +1,36 @@
+.main-footer{
+    color: #fff;
+    background-color: #171A29;
+}
+.row{
+    display: flex;
+    justify-content: center;
+}
+form{
+    background-color: rgba(255,255,255,.25);
+    border-radius: 12px;
+    height: 55px;
+    display: flex;
+
+}
+.col{
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+ul{
+    padding-top: 0;
+    list-style-type: none;
+    margin-top: 0;
+}
+a:hover {
+    color: #f50057;
+  }
+
+li{
+    padding-bottom: 7px;
+}
