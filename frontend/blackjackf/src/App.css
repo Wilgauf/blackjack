@@ -75,3 +75,28 @@ height: 300px;
 .howtoplay-body-paragraph {
   width: 30%;
 }
+
+/* CONTACT PAGE */
+
+.contact-heading {
+  text-align: center;
+}
+
+.contact-main-container {
+  background-image: url("./images/blackjackTable.jpeg");
+  height: 600px;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-bottom: 2%;
+}
+
+.contact-card-container {
+  padding-top: 7%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

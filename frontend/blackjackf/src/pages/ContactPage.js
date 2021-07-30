@@ -1,9 +1,20 @@
 import React from 'react';
+import ContactCardAndy from '../components/ContactCard/ContactCardAndy'
+import ContactCardWilson from '../components/ContactCard/ContactCardWilson'
+import ContactCardJoshua from '../components/ContactCard/ContactCardJoshua'
+import { Container } from '@material-ui/core';
 
 const ContactPage = () => {
   return (
     <div>
-      <h1>Contact</h1>
+      <h1 className="contact-heading">Contact</h1>
+      <div className="contact-main-container">
+        <div className="contact-card-container" >
+          <ContactCardAndy />
+          <ContactCardWilson />
+          <ContactCardJoshua />
+        </div>
+      </div>
     </div>
   );
 };
