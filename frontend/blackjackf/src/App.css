@@ -14,7 +14,22 @@ h3 {
 
 .hero-section {
   color:white;
+}
+.hero-image {
+  background-image:  url("./images/CityPicture.jpg");
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
 
+.hero-text {
+  text-align: left;
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  color: white;
 }
 
 /* ABOUT PAGE */
