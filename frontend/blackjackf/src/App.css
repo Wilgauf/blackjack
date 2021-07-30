@@ -10,6 +10,15 @@ h3 {
   color: #7A9EB4;
 }
 
+/* LANDING PAGE */
+
+.hero-section {
+  color:white;
+  background: url(images/CityPicture.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 /* ABOUT PAGE */
 
 .about-top-banner {

@@ -8,7 +8,7 @@ import {
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import GameboardPage from './pages/Gameboard/GameboardPage';
-import AboutPage from './pages/About/AboutPage';
+import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 import HowToPlay from './pages/HowToPlay';
