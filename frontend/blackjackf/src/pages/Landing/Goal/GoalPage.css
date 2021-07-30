@@ -1,0 +1,17 @@
+.cara-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cara-img{
+    height:300px;
+    width: 400px !important;  
+}
+
+.cara-text{
+    width: 600px;
+}
+.goalpage{
+    background-color:#35654d;
+    padding: 65px 0px 30px;
+}
