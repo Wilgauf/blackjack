@@ -6,6 +6,7 @@ class Game(models.Model):
         ('P', 'Player'),
         ('D', 'Dealer'),
     )
+
     # player = models.ForeignKey(User, on_delete=models.CASCADE, related_name='games')
     deck_id = models.CharField(max_length=200)
     player_bet = models.IntegerField(6)
@@ -14,5 +15,6 @@ class Game(models.Model):
     player_bust = models.BooleanField(default=False)
     dealer_bust = models.BooleanField(default=False)
     player_chips = models.IntegerField(6)
-    active = models.BooleanField(default=True)
     blackjack = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
+    hand_winner = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
+    active = models.BooleanField(default=True)

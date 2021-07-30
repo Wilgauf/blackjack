@@ -34,6 +34,3 @@ def games(request, game_id=null):
             serializer.save()
             new_state = Game.objects.get(id=game_id)
             return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
