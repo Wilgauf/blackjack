@@ -1,0 +1,15 @@
+.GBMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.welcome{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.boardBackground{
+    height: 80vh;
+    width: 80vw;
+}
