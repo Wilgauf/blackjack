@@ -8,9 +8,10 @@ import {
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import GameboardPage from './pages/Gameboard/GameboardPage';
-import AboutPage from './pages/About/AboutPage';
+import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
+import HowToPlay from './pages/HowToPlay';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Navbar/>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/howtoplay" component={HowToPlay} />
         <Route exact path="/gameboard" component={GameboardPage} />
         <Route exact path="/contact" component={ContactPage} />
         <Footer/>
