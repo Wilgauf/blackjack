@@ -1,0 +1,44 @@
+.title-container{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.meet-title{
+    font-size: 50px;  
+}
+
+.meet-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; 
+    margin: 0px 0px 100px;
+}
+.info-card{
+    margin-right: 50px;
+    border-radius: 15%;
+    background: rgba(255,255,255,.4);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4.0px );
+    -webkit-backdrop-filter: blur( 4.0px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+}
+.top-line{
+    display: flex;
+    width: 200px;
+    margin: 8px 8px 0px 8px;
+}
+.bot-line{
+    margin: 0px 8px 0px 8px;
+}
+
+.meet-img{
+    height:100px;
+    width: 100px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+.title{
+    color: antiquewhite;
+}
