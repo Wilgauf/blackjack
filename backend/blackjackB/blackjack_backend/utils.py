@@ -21,7 +21,7 @@ card_key = {
 
 }
 
-#expects 'player_bet' is in request from frontend
+#Creates intial game state by filling necessary. Expects 'player_bet' is in request from frontend
 def create_new_game(request):
     deck_setup = draw_card('new', 2)
     deck_id = deck_setup['deck_id']
@@ -90,13 +90,26 @@ def player_stay(dealer_hand, player_hand, deck_id):
             update_data['hand_winner'] = 'P'
     else:
         update_data['dealer_bust'] = True
-        
     
+    #betting payout logic might be needed here
 
+    return update_data
     
+#logic for player hitting
+def player_hit(deck_id, player_hand):
+    update_data = {}
+    new_hand = draw_add(deck_id, player_hand)
+    hand_value = check_hand(new_hand)
 
+    if hand_value == 21:
+        update_data['blackjack'] = 'P'
+        update_data['hand_winner'] = 'P'
+    elif hand_value < 21:
+        update_data['player_hand'] = new_hand
+    else:
+        update_data['player_bust'] = True
+        update_data['hand_winner'] = 'D'
 
-        
-        
-
-
+    #add betting/payout logic
+    
+    return update_data
