@@ -4,7 +4,7 @@ defaultURL = "http://deckofcardsapi.com/api/deck/"
 def create_a_deck():
     response = requests.get(defaultURL+ "new/shuffle/?deck_count=1")
     if response.json()["success"] :
-        # print(response.json())
+        #print(response.json())
         return response.json()['deck_id']
     else:
         print("Request Failed with not ok status")

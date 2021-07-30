@@ -7,21 +7,23 @@ import {
 } from "react-router-dom";
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
-import GameboardPage from './pages/GameboardPage';
+import GameboardPage from './pages/Gameboard/GameboardPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-
+import Footer from './components/Footer';
+import HowToPlay from './pages/HowToPlay';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar/>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/howtoplay" component={HowToPlay} />
         <Route exact path="/gameboard" component={GameboardPage} />
         <Route exact path="/contact" component={ContactPage} />
-        <Navbar/>
-        <h1>Test</h1>
+        <Footer/>
       </Router>
     </div>
   );

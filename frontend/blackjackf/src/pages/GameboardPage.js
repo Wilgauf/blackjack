@@ -3,7 +3,9 @@ import React from 'react';
 const GameboardPage = () => {
   return (
     <div>
-      <h1>Gameboard</h1>
+      <div className="gameboard">
+        <h1>Welcome to the table</h1>
+      </div>
     </div>
   );
 };
