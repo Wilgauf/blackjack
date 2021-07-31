@@ -18,36 +18,28 @@ card_key = {
     '7':7,
     '8':8,
     '9':9,
-
 }
 
-#Creates intial game state by filling necessary. Expects 'player_bet' is in request from frontend
+#Creates intial game state by filling necessary info. Expects 'player_bet' is in request from frontend
 def create_new_game(request):
+    update_data = {}
     deck_setup = draw_card('new', 2)
     deck_id = deck_setup['deck_id']
-    player_hand = deck_setup['cards']
-    dealer_hand = draw_card(deck_id, 2)
-    player_bet = int(request.data['player_bet'])
-    player_chips = 1000 - player_bet
+    update_data['deck_id'] = deck_setup['deck_id']
+    update_data['player_hand'] = deck_setup['cards']
+    update_data['dealer_hand'] = draw_card(deck_id, 2)
+    update_data['player_bet'] = int(request.data['player_bet'])
+    update_data['player_chips'] = 1000 - update_data['player_bet']
+    
 
-    if check_hand(player_hand) == 'blackjack':
-        blackjack = 'P'
+    if check_hand(update_data['player_hand']) == 'blackjack':
+        update_data['blackjack'] = 'P'
 
-    if check_hand(dealer_hand) == 'blackjack':
-        blackjack = 'D'
+    if check_hand(update_data['dealer_hand']) == 'blackjack':
+        update_data['blackjack'] = 'D'
 
 
-    request.data.update({
-        'deck_id': deck_id,
-        'player_hand': player_hand,
-        'dealer_hand': dealer_hand,
-        'player_chips': player_chips
-    })
-
-    if blackjack:
-        request.data.update(
-            'blackjack': blackjack,
-        )
+    request.data.update(update_data)
     return request
 
 
@@ -57,7 +49,7 @@ def check_hand(cards):
     hand_value = 0
     for _, card in enumerate(cards):
         if card[0] == 'A' and hand_value <= 10:
-            hand_value += 1
+            hand_value += 11
         hand_value += card_key[card[0]]
     
     return hand_value
@@ -113,3 +105,6 @@ def player_hit(deck_id, player_hand):
     #add betting/payout logic
     
     return update_data
+
+
+# def new_round(deck_id)
