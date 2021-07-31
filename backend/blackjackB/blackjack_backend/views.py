@@ -16,10 +16,11 @@ def games(request, game_id=None):
     view comments go here
     Game is created with 'POST' request from frontend. Data only contains {player_bet: <int>}
     """
+    # action = request.query_params.get('action')
+    # if action in []
     if request.method == 'POST':
         #use helper functions in utils.py to complete request data for serializer
-        temp_req = request
-        request = create_new_game(temp_req)
+        request = create_new_game(request)
         serializer = GameSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -31,7 +32,14 @@ def games(request, game_id=None):
         #use helper functions in utils.py to complete game logic and update game model
         # patch_data = #util function goes here
 
+        #map 'key' action to function to run
+        # map[action]()
+        
+
         serializer = GameSerializer(curr_state, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
+    #return for exceptions

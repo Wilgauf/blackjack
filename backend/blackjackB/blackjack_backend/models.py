@@ -19,3 +19,4 @@ class Game(models.Model):
     blackjack = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
     hand_winner = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
     active = models.BooleanField(default=True)
+

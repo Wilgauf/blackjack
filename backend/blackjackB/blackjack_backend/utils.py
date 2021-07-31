@@ -20,6 +20,10 @@ card_key = {
     '9':9,
 }
 
+# MAP = {
+#     'HIT': player_hit
+# }
+
 #Creates intial game state by filling necessary info. Expects 'player_bet' is in request from frontend
 def create_new_game(request):
     update_data = {}
