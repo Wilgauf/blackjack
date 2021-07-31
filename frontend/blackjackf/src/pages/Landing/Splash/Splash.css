@@ -1,0 +1,29 @@
+.page-container{
+    height:94vh;
+    width: 100vw;
+    background: url(../../../images/CityPicture.jpg) blue;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.splash-container{
+    padding-top: 5%;
+    padding-left: 50%;
+    display: flex;
+    flex-direction: column;
+    width:25%;
+    justify-content: right;
+}
+h2{
+    color: aliceblue;
+}
+.play-bttn{
+    width: 40%;
+    position: absolute;
+    left: 30%;
+}
+.splash-title{
+    font-size: 65px;
+}

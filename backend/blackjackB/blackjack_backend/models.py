@@ -2,11 +2,19 @@ from django.db import models
 
 # Create your models here.
 class Game(models.Model):
+    BLACKJACK = (
+        ('P', 'Player'),
+        ('D', 'Dealer'),
+    )
+
     # player = models.ForeignKey(User, on_delete=models.CASCADE, related_name='games')
-    player_bet = models.IntegerField(5)
+    deck_id = models.CharField(max_length=200)
+    player_bet = models.IntegerField(6)
     player_hand = models.CharField(max_length=64)
     dealer_hand = models.CharField(max_length=64)
-    player_break = models.BooleanField(default=False)
-    dealer_break = models.BooleanField(default=False)
-    player_chips = models.IntegerField(5)
+    player_bust = models.BooleanField(default=False)
+    dealer_bust = models.BooleanField(default=False)
+    player_chips = models.IntegerField(6)
+    blackjack = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
+    hand_winner = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
     active = models.BooleanField(default=True)

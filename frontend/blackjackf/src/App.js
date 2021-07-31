@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import Navbar from './components/Navbar';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/Landing/LandingPage';
 import GameboardPage from './pages/Gameboard/GameboardPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
