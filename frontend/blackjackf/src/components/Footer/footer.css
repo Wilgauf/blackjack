@@ -1,4 +1,5 @@
 .main-footer{
+    margin-top: 20px;
     color: #fff;
     background-color: #171A29;
 }
@@ -33,4 +34,7 @@ a:hover {
 
 li{
     padding-bottom: 7px;
+}
+h4{
+    margin-top: 15px;
 }

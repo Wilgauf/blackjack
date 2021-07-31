@@ -15,16 +15,6 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#ffff',
-      },
-      secondary: {
-        main: '#ffff',
-      },
-    },
-});
 
   
 function Footer() {
@@ -62,7 +52,7 @@ function Footer() {
                             <li><a href="/about">About</a></li>
                         </ul>
                         <ul className="footer-list">
-                            <li><a href="/">How to Play</a></li>
+                            <li><a href="/howtoplay">How to Play</a></li>
                             <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>

@@ -12,6 +12,9 @@ h3 {
 
 /* LANDING PAGE */
 
+.hero-section {
+  color:white;
+}
 .hero-image {
   background-image:  url("./images/CityPicture.jpg");
   height: 400px;
