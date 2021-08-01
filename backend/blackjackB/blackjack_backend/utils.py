@@ -22,13 +22,6 @@ card_key = {
     '9':9,
 }
 
-# FUNC_MAP = {
-#     'hit': player_hit,
-#     'stay': player_stay,
-#     'new': create_new_game,
-#     'bet': new_bet,
-# }
-
 #Creates intial game state by filling necessary info. Expects 'player_bet' is in request from frontend
 def create_new_game(request):
     data = {}
@@ -40,13 +33,11 @@ def create_new_game(request):
     data['player_bet'] = int(request.data['player_bet'])
     data['player_chips'] = 1000 - data['player_bet']
     
-
     if check_hand(data['player_hand']) == 21:
         data['blackjack'] = 'P'
 
     if check_hand(data['dealer_hand']) == 21:
         data['blackjack'] = 'D'
-
 
     request.data.update(data)
     return request
