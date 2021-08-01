@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blackjack_backend',
     'rest_framework',
-    'blackjack_backend'
 ]
 
 MIDDLEWARE = [
