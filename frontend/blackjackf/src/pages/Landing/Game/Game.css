@@ -1,7 +1,9 @@
 .content-container{
     display: flex;
     flex-direction: row;
-    padding: 0;
+    padding: 5%;
+
+
 }
 
 .left-col{
@@ -9,6 +11,7 @@
     height: 45vh;
     margin-left: 45px;
     margin-right: 50px;
+    
 }
 .right-col{
     width:45vw;
@@ -17,4 +20,5 @@
 .game-img{
     height: 45vh;
     width: 45vw;
+    border-radius: 15px;
 }
