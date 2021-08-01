@@ -28,25 +28,12 @@ def new_game(request):
     message = {'error' : f'This endpoint does not support {request.method} requests.'}
     return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
-    # if request.method == 'PATCH':
-    #     curr_state = Game.objects.get(id=game_id)
-    #     #use helper functions in utils.py to complete game logic and update game model
-    #     # patch_data = #util function goes here
-
-    #     #map 'key' action to function to run
-    #     # map[action]()
-
-
-    #     serializer = GameSerializer(curr_state, data=request.data, partial=True)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    
-    #return for exceptions
 
 @api_view(['PATCH'])
 def hit(request, game_id):
+    """
+    view comments go here
+    """
 
     curr_state = Game.objects.get(id=game_id)
 
@@ -67,6 +54,9 @@ def hit(request, game_id):
 
 @api_view(['PATCH'])
 def stay(request, game_id):
+    """
+    view comments go here
+    """
 
     curr_state = Game.objects.get(id=game_id)
 
@@ -87,6 +77,9 @@ def stay(request, game_id):
 
 @api_view(['PATCH'])
 def bet(request, game_id):
+    """
+    view comments go here
+    """
 
     curr_state = Game.objects.get(id=game_id)
 
