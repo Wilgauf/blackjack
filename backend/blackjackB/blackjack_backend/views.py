@@ -3,10 +3,13 @@ from .models import Game
 from .utils import create_new_game, FUNC_MAP
 from .serializers import GameSerializer
 
+from rest_framework.views import APIView
 from rest_framework import status, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+
+#User views:
 
 @api_view(['GET'])
 def current_user(request):
@@ -24,7 +27,7 @@ class UserList(APIView):
     method here too, for retrieving a list of all User objects.
     """
 
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny)
 
     def post(self, request, format=None):
         serializer = UserSerializerWithToken(data=request.data)
@@ -34,6 +37,7 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#Game Views:
 
 @api_view(['POST'])
 def new_game(request):
