@@ -42,11 +42,11 @@ const signupUser = async (userObject) => {
   return data
 };
 
-const startGame = async (player_bet, token)=>{
-  let res = await fetch(BASE_URL+'api/new_game/',
-  method: 'POST',)
+// const startGame = async (player_bet, token)=>{
+//   let res = await fetch(BASE_URL+'api/new_game/',
+//   method: 'POST',)
 
-}
+// }
 
 
 

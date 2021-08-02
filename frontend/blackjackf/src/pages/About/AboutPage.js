@@ -2,12 +2,13 @@ import React from 'react';
 import './About.css'
 import {aboutText1, aboutText2} from './storage'
 import bottomBanner from '../../images/HandsBanner.jpg'
+import topBanner from '../../images/blackjackBanner.jpeg'
 
 const AboutPage = () => {
   return (
     <div>
       <div className="top-container">
-        <img className="banner" source src={require("../../images/blackjackBanner.jpeg").default}  alt="21"/>      
+        <img className="banner" source src={topBanner}  alt="21"/>      
       </div>
       
         <div className='text-container'>

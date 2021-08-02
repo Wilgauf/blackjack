@@ -1,7 +1,7 @@
 .page-container{
     height:94vh;
     width: 100vw;
-    background: url(../../../images/CityPicture.jpg) blue;
+    background: url(../../../images/CityPicture.jpg);
     background-size: 100% 100%;
     display: flex;
     flex-direction: row;
