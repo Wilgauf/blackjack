@@ -84,14 +84,22 @@ function getModalStyle() {
       console.log(response)
       if (response.token){
         setLoggedIn(true)
+        console.log('logging in')
         localStorage.setItem("auth-user", `${response.token}`)
-        setUserID()
+        console.log(response.user['id'])
+        setUserID(response.user['id'])
+
       }
       setOpen(false)
     };
 
+    const test = ()=>{
+      console.log(localStorage.getItem('user-id'))
+    }
+
     const handleLogout = () => {
       localStorage.setItem("auth-user", null)
+      localStorage.setItem("user-id", null)
       setLoggedIn(false)
     }
 
@@ -106,6 +114,10 @@ function getModalStyle() {
     }
   }
 
+  useEffect(()=>{
+    localStorage.setItem("user-id", `${userID}`)
+  },[userID])
+
     return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -115,7 +127,7 @@ function getModalStyle() {
             <Typography variant="h6" className={classes.title}>
               
             </Typography>
-            <Button color="inherit">About</Button>
+            <Button color="inherit" onClick={test}>About</Button>
             <Button color="inherit">How To Play</Button>
             <Button color="inherit">Contact</Button>
             {loggedIn ? <Button variant="contained" color="secondary" onClick={handleLogout}>Logout</Button> : <Button variant="contained" color="secondary" onClick={handleOpen}>Login/Signup</Button>}
