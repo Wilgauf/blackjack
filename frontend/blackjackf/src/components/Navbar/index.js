@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import { TextField } from '@material-ui/core'
-import Login from '../../components/Login/Login'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import logo from "./BlackjackLogo.png"
+import {login, signupUser} from '../../api'
 
 // import logo
 const useStyles = makeStyles((theme) => ({
@@ -65,12 +65,44 @@ function getModalStyle() {
     }
     const [modalStyle] = useState(getModalStyle);   
     const [open, setOpen] = useState(false);
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false)
     const handleOpen = () => {
       setOpen(true);
     };
     const handleClose = () => {
       setOpen(false);
     };
+    const handleLogin = async ()=>{
+      let userObject ={
+        username: username,
+        password: password
+      }
+      let response = await login(userObject)
+      console.log(response)
+      if (response.token){
+        setLoggedIn(true)
+        localStorage.setItem("auth-user", `${response.token}`)
+      }
+      setOpen(false)
+    };
+    const handleLogout = () => {
+      localStorage.setItem("auth-user", null)
+      setLoggedIn(false)
+      // setAuthUser(null)
+    }
+    const handleSignup = async ()=>{
+      let userObject = {
+        username: username,
+        password: password
+      }
+      let response = await signupUser(userObject)
+      if (response.token){
+        setLoggedIn(true)
+        localStorage.setItem("auth-user", `${response.token}`)
+    }
+  }
 
     return (
     <ThemeProvider theme={theme}>
@@ -84,7 +116,8 @@ function getModalStyle() {
             <Button color="inherit">About</Button>
             <Button color="inherit">How To Play</Button>
             <Button color="inherit">Contact</Button>
-            <Button variant="contained" color="secondary" onClick={handleOpen}>Login</Button>
+            {loggedIn ? <Button variant="contained" color="secondary" onClick={handleLogout}>Logout</Button> : <Button variant="contained" color="secondary" onClick={handleOpen}>Login/Signup</Button>}
+            
             <Modal
             open={open}
             onClose={handleClose}
@@ -98,6 +131,8 @@ function getModalStyle() {
                             id="outlined-size-small"
                             variant="outlined"
                             size="small"
+                            value={username}
+                            onInput={e=>setUsername(e.target.value)}
                             color="secondary"
                             />
                             <TextField
@@ -105,11 +140,14 @@ function getModalStyle() {
                             label="Password"
                             type="password"
                             size="small"
+                            value={password}
+                            onInput={e=>setPassword(e.target.value)}
                             autoComplete="current-password"
                             variant="outlined"
                             />
                             </div>
-                            <Button color="secondary" size="small" onClick={null}>Submit</Button>
+                            <Button color="secondary"  onClick={handleLogin} size="small" >Sign-in</Button>
+                            <Button color="secondary"  onClick={handleSignup} size="small" >Signup</Button>
                         </form>
                 </div>
             </Modal>

@@ -1,13 +1,14 @@
-let BASE_URL = 'https://localhost:8000/'
-
-const login = (userObject) => {
-  return fetch(`${BASE_URL}token-auth/`, {
+let BASE_URL = 'http://localhost:8000/'
+const login = async (userObject) => {
+  let res = await fetch(`${BASE_URL}token-auth/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userObject)
-  }).then(res => res)
+  })
+  let data = await res.json()
+  return data
 };
 
 const getLoggedInUser = (token) => {
@@ -26,8 +27,21 @@ const signupUser = (userObject) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userObject)
-  }).then(res => res)
+  }).then(res=>res)
 };
+
+// const signupUser = async (userObject) => {
+//   let res = await fetch(`${BASE_URL}api/users/`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(userObject)
+//   })
+//   let data = await res.json()
+//   return data
+// };
+
 
 
 export { login, getLoggedInUser, signupUser }
