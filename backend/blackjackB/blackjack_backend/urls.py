@@ -7,5 +7,5 @@ urlpatterns = [
     path('play/<int:game_id>/stay/', views.stay, name='stay'),
     path('play/<int:game_id>/bet/', views.bet, name='bet'),
     path('current_user/', views.current_user),
-    path('user/', views.UserList.as_view()),
+    path('users/', views.UserList.as_view()),
 ]
