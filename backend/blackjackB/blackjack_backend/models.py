@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Game(models.Model):
@@ -8,7 +9,7 @@ class Game(models.Model):
         ('D', 'Dealer'),
     )
 
-    # player = models.ForeignKey(User, on_delete=models.CASCADE, related_name='games')
+    player = models.ForeignKey(User, on_delete=models.CASCADE, related_name='games')
     deck_id = models.CharField(max_length=200)
     player_bet = models.IntegerField(3)
     player_hand = ArrayField(models.CharField(max_length=2)) #ArrayFields(CharField(max_length=2))

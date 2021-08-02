@@ -119,8 +119,8 @@ def payout(bet, win_type):
         'BJ': 1.5,
         'N': 1
     }
-    winnings = bet + (bet * rates[win_type])
-    return math.floor(winnings)
+    bet += bet * rates[win_type]
+    return math.floor(bet)
 
 #logic for new hand. returns player + dealer hands and blackjack winner (if exists)
 def new_bet(curr_state, bet):
