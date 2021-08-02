@@ -98,6 +98,7 @@ function getModalStyle() {
         password: password
       }
       let response = await signupUser(userObject)
+      console.log(response)
       if (response.token){
         setLoggedIn(true)
         localStorage.setItem("auth-user", `${response.token}`)

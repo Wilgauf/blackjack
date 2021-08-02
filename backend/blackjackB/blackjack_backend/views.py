@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Game
 from .utils import create_new_game, FUNC_MAP
-from .serializers import GameSerializer
+from .serializers import GameSerializer, UserSerializerWithToken, UserSerializer
 
 from rest_framework.views import APIView
 from rest_framework import status, permissions
@@ -27,7 +27,7 @@ class UserList(APIView):
     method here too, for retrieving a list of all User objects.
     """
 
-    permission_classes = (permissions.AllowAny)
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
         serializer = UserSerializerWithToken(data=request.data)
