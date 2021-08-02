@@ -42,15 +42,33 @@ const signupUser = async (userObject) => {
   return data
 };
 
+<<<<<<< HEAD
 // const startGame = async (player_bet, token)=>{
 //   let res = await fetch(BASE_URL+'api/new_game/',
 //   method: 'POST',)
 
 // }
+=======
+const startGame = async (player_bet, user_id, token)=>{
+  let data = {
+    "player":user_id,
+    "player_bet":player_bet
+  }
+  let res = await fetch(BASE_URL+'api/new_game/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `JWT ${token}`
+  },
+  body: JSON.stringify(data)
+  })
+  return res.json()
+}
+>>>>>>> d3be2bbbca1fce61394e888808bfd413ce21c956
 
 
 
-export { login, getLoggedInUser, signupUser }
+export { login, getLoggedInUser, signupUser, startGame }
 
 /*
 
