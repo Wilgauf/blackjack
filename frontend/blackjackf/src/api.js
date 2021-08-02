@@ -20,50 +20,38 @@ const getLoggedInUser = (token) => {
   }).then(res => res)
 };
 
-const signupUser = (userObject) => {
-  return fetch(`${BASE_URL}api/users/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userObject)
-  }).then(res=>res)
-};
-
-// const signupUser = async (userObject) => {
-//   let res = await fetch(`${BASE_URL}api/users/`, {
+// const signupUser = (userObject) => {
+//   return fetch(`${BASE_URL}api/users/`, {
 //     method: 'POST',
 //     headers: {
 //       'Content-Type': 'application/json'
 //     },
 //     body: JSON.stringify(userObject)
-//   })
-//   let data = await res.json()
-//   return data
+//   }).then(res=>res)
 // };
+
+const signupUser = async (userObject) => {
+  let res = await fetch(`${BASE_URL}api/users/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userObject)
+  })
+  let data = await res.json()
+  return data
+};
+
+const startGame = async (player_bet, token)=>{
+  let res = await fetch(BASE_URL+'api/new_game/')
+
+}
 
 
 
 export { login, getLoggedInUser, signupUser }
 
 /*
-useEffect(() => {
-  const getUser = async () => {
-    let auth_token = localStorage.getItem("auth-user")
-    if (auth_token !== 'null') {
-      let response = await getLoggedInUser(auth_token)
-      let data = await response.json()
-      if (data.username) {
-        setIsLoggedIn(true)
-        setAuthUser(data)
-      }
-    }
-  }
-
-  getUser()
-
-}, [user, isLoggedIn])
-
 
 const handleLogin = async (evt) => {
   evt.preventDefault()
