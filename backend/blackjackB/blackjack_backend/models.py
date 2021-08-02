@@ -21,6 +21,6 @@ class Game(models.Model):
     player_chips = models.IntegerField(6)
     blackjack = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
     hand_winner = models.CharField(max_length=1, choices=BLACKJACK, blank=True)
-    payout = models.IntegerField(6, blank=True)
+    payout = models.IntegerField(6, blank=True, default=0)
     active = models.BooleanField(default=True)
 

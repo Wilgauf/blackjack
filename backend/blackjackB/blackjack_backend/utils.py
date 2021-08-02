@@ -28,7 +28,8 @@ def create_new_game(request):
     data = {}
     deck_setup = draw_card('new', 2)
     deck_id = deck_setup['deck_id']
-    data['player'] = 
+    print(request.data)
+    data['player'] = request.data['player']
     data['deck_id'] = deck_setup['deck_id']
     data['player_hand'] = deck_setup['cards']
     data['dealer_hand'] = draw_card(deck_id, 2)

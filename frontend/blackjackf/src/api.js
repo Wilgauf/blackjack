@@ -43,7 +43,8 @@ const signupUser = async (userObject) => {
 };
 
 const startGame = async (player_bet, token)=>{
-  let res = await fetch(BASE_URL+'api/new_game/')
+  let res = await fetch(BASE_URL+'api/new_game/',
+  method: 'POST',)
 
 }
 
