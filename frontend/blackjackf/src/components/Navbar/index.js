@@ -69,6 +69,7 @@ function getModalStyle() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [loggedIn, setLoggedIn] = useState(false)
+    const [userID, setUserID] = useState(null)
     const handleOpen = () => {
       setOpen(true);
     };
@@ -85,24 +86,24 @@ function getModalStyle() {
       if (response.token){
         setLoggedIn(true)
         localStorage.setItem("auth-user", `${response.token}`)
+        setUserID()
       }
       setOpen(false)
     };
+
     const handleLogout = () => {
       localStorage.setItem("auth-user", null)
       setLoggedIn(false)
-      // setAuthUser(null)
     }
+
     const handleSignup = async ()=>{
       let userObject = {
         username: username,
         password: password
       }
       let response = await signupUser(userObject)
-      console.log(response)
       if (response.token){
-        setLoggedIn(true)
-        localStorage.setItem("auth-user", `${response.token}`)
+        handleLogin()
     }
   }
 

@@ -22,11 +22,14 @@ card_key = {
     '9':9,
 }
 
-#Creates intial game state by filling necessary info. Expects 'player_bet' is in request from frontend
+#Creates intial game state by filling necessary info. 
+#Expects 'player_bet' and 'player' is in request body from frontend
 def create_new_game(request):
     data = {}
     deck_setup = draw_card('new', 2)
     deck_id = deck_setup['deck_id']
+    print(request.data)
+    data['player'] = request.data['player']
     data['deck_id'] = deck_setup['deck_id']
     data['player_hand'] = deck_setup['cards']
     data['dealer_hand'] = draw_card(deck_id, 2)
