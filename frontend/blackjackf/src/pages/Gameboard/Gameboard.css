@@ -45,3 +45,26 @@
     margin-left: 20px;
     justify-content: space-around;
 }
+
+.modal-text{
+    text-align: center;
+}
+.modal-title{
+    color:black;
+    font-size: 50px;
+}
+.modal-subtitle{
+    font-size: 25px;
+}
+.modal-input{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 17px;
+}
+.img-container{
+    display: flex;
+    justify-content: center;
+}
+.modal-img{
+    height: 50vh;
+}

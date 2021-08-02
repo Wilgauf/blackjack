@@ -75,8 +75,7 @@ function getModalStyle() {
     };
     const handleClose = () => {
       setOpen(false);
-    };
-    const handleLogin = async ()=>{
+    };    const handleLogin = async ()=>{
       let userObject ={
         username: username,
         password: password
@@ -85,8 +84,12 @@ function getModalStyle() {
       console.log(response)
       if (response.token){
         setLoggedIn(true)
+        console.log('logging in')
+        console.log(response.token)
         localStorage.setItem("auth-user", `${response.token}`)
-        setUserID()
+        console.log(response.user['id'])
+        setUserID(response.user['id'])
+
       }
       setOpen(false)
     };
@@ -106,6 +109,10 @@ function getModalStyle() {
         handleLogin()
     }
   }
+
+  useEffect(()=>{
+    localStorage.setItem("user-id", `${userID}`)
+  },[userID])
 
     return (
     <ThemeProvider theme={theme}>
