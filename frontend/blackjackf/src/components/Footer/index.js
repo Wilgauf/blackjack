@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core'
 import createPalette from '@material-ui/core/styles/createPalette';
@@ -48,12 +49,13 @@ function Footer() {
                     </div>
                     <div className="col">
                         <ul className="footer-list">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about">About</a></li>
+                            <li><Link to='/'>Home </Link></li>
+                            <li><Link to='/about'>About </Link></li>
+                            {/* <li><a href="/about">About</a></li> */}
                         </ul>
                         <ul className="footer-list">
-                            <li><a href="/howtoplay">How to Play</a></li>
-                            <li><a href="/contact">Contact</a></li>
+                            <li><Link to='/howtoplay'>How to play </Link></li>
+                            <li><Link to='/contact'>Contact </Link></li>
                         </ul>
                     </div>
                 </div>

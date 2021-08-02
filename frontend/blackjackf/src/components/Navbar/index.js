@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -114,9 +115,9 @@ function getModalStyle() {
             <Typography variant="h6" className={classes.title}>
               
             </Typography>
-            <Button color="inherit">About</Button>
-            <Button color="inherit">How To Play</Button>
-            <Button color="inherit">Contact</Button>
+            <Button component={Link} to='/about' color="inherit">About</Button>
+            <Button component={Link} to='/howtoplay' color="inherit">How To Play</Button>
+            <Button component={Link} to='/contact' color="inherit">Contact</Button>
             {loggedIn ? <Button variant="contained" color="secondary" onClick={handleLogout}>Logout</Button> : <Button variant="contained" color="secondary" onClick={handleOpen}>Login/Signup</Button>}
             
             <Modal
