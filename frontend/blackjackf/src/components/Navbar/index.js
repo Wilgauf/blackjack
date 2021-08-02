@@ -112,7 +112,7 @@ function getModalStyle() {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <img src={logo} alt="21" style={logoStyle}/>
+            <Link to='/'><img src={logo} alt="21" style={logoStyle}/></Link>
             <Typography variant="h6" className={classes.title}>
               
             </Typography>
