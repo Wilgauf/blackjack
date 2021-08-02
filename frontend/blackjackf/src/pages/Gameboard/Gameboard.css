@@ -1,7 +1,7 @@
 .GBMain{
     background-image: url('../../images/table_blackjack.png');
-    height: 85vh;
-    width: 95vw;
+    height: 90vh;
+    width: 100vw;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;

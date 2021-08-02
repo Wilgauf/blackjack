@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import table from '../../images/table_blackjack.png'
+import cardBack from '../../images/Oak-Leaf-Back.jpg'
 import './Gameboard.css'
 import { Button } from '@material-ui/core'
 
@@ -35,7 +36,7 @@ const GameboardPage = () => {
       <div className='dealer-section'>
         <h2>Dealer Cards</h2>
         <div className='cards'>
-          <img src={('http://deckofcardsapi.com/static/img/KH.png')} alt='hope its not 21'/> 
+          <img src={cardBack} alt='hope its not 21'/> 
           <img src={('https://deckofcardsapi.com/static/img/3S.png')} alt='hope its not 21'/>
         </div>
       </div>
