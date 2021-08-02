@@ -42,13 +42,6 @@ const signupUser = async (userObject) => {
   return data
 };
 
-<<<<<<< HEAD
-// const startGame = async (player_bet, token)=>{
-//   let res = await fetch(BASE_URL+'api/new_game/',
-//   method: 'POST',)
-
-// }
-=======
 const startGame = async (player_bet, user_id, token)=>{
   let data = {
     "player":user_id,
@@ -64,7 +57,6 @@ const startGame = async (player_bet, user_id, token)=>{
   })
   return res.json()
 }
->>>>>>> d3be2bbbca1fce61394e888808bfd413ce21c956
 
 
 
