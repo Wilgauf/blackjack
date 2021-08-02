@@ -37,10 +37,14 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         fields = ['id', 'token', 'username', 'password']
 
 class GameSerializer(serializers.ModelSerializer):
+    player = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=False)
+
     class Meta:
         model = Game
-        fields = ['id',  
+        fields = [
+        'id',  
         'deck_id',
+        'player',
         'player_bet',
         'player_hand',
         'dealer_hand',
@@ -49,5 +53,5 @@ class GameSerializer(serializers.ModelSerializer):
         'player_chips',
         'blackjack',
         'hand_winner',
-        'active'
+        'active',
         ]
