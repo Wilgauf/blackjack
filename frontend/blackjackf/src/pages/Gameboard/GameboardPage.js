@@ -46,7 +46,7 @@ const GameboardPage = () => {
   const [playerImg, setPlayerImg] = useState([]);
   const [dealerVal, setDealerVal] = useState(0);
   const [playerVal, setPlayerVal] = useState(0);
-  const [playerChips, setPlayerChips] = useState(0);
+  const [playerChips, setPlayerChips] = useState(1000);
   const [playerBust, setPlayerBust] = useState(false)
   const [dealerBust, setDealerBust] = useState(false)
   const [newHand, setNewHand] = useState(false)
@@ -93,16 +93,17 @@ const GameboardPage = () => {
 
   useEffect(()=>{ 
     setOpen(true)
-    getChips()
+    // getChips()
   },[])
-  const getChips = async ()=>{
-    let user_id = localStorage.getItem('user-id')
-    let token = localStorage.getItem('auth-user')
-    let bet = 0
-    let res = await startGame(bet, user_id, token)
-    console.log(res)
-    setPlayerChips(res.player_chips)
-  }
+
+  // const getChips = async ()=>{
+  //   let user_id = localStorage.getItem('user-id')
+  //   let token = localStorage.getItem('auth-user')
+  //   let playerBet = 0
+  //   let res = await startGame(playerBet, user_id, token)
+  //   console.log(res)
+  //   setPlayerChips(res.player_chips)
+  // }
 
   // useEffect(()=>{
   //   if(gameState.payout !== null){
@@ -123,6 +124,9 @@ const GameboardPage = () => {
       setGameState(res)
       setPlayerHand(res.player_hand)
       setPlayerVal(res.p_hand_val)
+      setPlayerChips(res.player_chips)
+      setPayout(res.payout)
+
     }else {
       console.log('Cannot hit. your are over 21!')
     }
@@ -138,6 +142,10 @@ const GameboardPage = () => {
     setDealerHand(res.dealer_hand)
     setDealerVal(res.d_hand_val)
     setNewHand(true)
+    setPlayerHand(res.player_hand)
+    setPlayerVal(res.p_hand_val)
+    setPlayerChips(res.player_chips)
+    setPayout(res.payout)
     if(res.hand_winner ==='P'){
       setGameStatus({'win':true})
     }
@@ -157,14 +165,18 @@ const GameboardPage = () => {
     if(bet <= gameState.player_chips){
       let res = await playerBet(gameState.id, bet, token)
       setGameState(res)
+      console.log('bet :' , res)
       console.log(gameOver)
       setDealerHand(res.dealer_hand)
       setDealerVal(res.d_hand_val)
       setPlayerHand(res.player_hand)
       setPlayerVal(res.p_hand_val)
+      setPlayerChips(res.player_chips)
+      setPayout(res.payout)
       setNewHand(false)
+    }else {
+      console.log('Cannot bet more chips than you have!')
     }
-    console.log('Cannot bet more chips than you have!')
   }
 
   const renderCards = (cardsArr)=>{
@@ -198,7 +210,7 @@ const GameboardPage = () => {
           <div className='modal-input'>
             <TextField id="standard-number" label="Bet" type="number"
             onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
-            shrink: true,}} defaultValue={10} />
+            shrink: true,}} defaultValue={0} />
             <Button variant='contained' color="secondary"  onClick={handleGameStart} >Deal the cards</Button>
           </div>
           <div className='img-container'>
@@ -224,7 +236,7 @@ const GameboardPage = () => {
           
           <div className='player-section'>
             <div className='dealer-text'>
-              <h2 className='cards-heading'>Your Cards. Chip Count: {gameState.player_chips}</h2> 
+              <h2 className='cards-heading'>Your Cards. Chip Count: {playerChips}</h2> 
             </div>
             <div className='cards'>
               {renderCards(playerHand)}
@@ -238,7 +250,7 @@ const GameboardPage = () => {
                 {/* need to disply player chip count here as well */}
               
                 <TextField id="standard-number" label="Bet" type="number" onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
-                  shrink: true,}} defaultValue={10}/>
+                  shrink: true,}} defaultValue={0}/>
                 <Button variant='contained' color="secondary"  onClick={newBet} >Place Bet</Button>
               </div>
             }
@@ -255,6 +267,7 @@ const GameboardPage = () => {
       { gameStatus.win ? 
         <div className='game-status win' id='win'>
           <h1>Congrats you won!</h1>
+          <h1>Your Winnings: {payout}</h1>
         </div>
         :
         null
