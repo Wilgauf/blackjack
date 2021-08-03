@@ -48,7 +48,7 @@ https://wilsongauf.com/
 
 Joshua Franklin
 
-/*Write your bio here*/
+I am an 8 year U.S. Marine Corps veteran turned Software Developer who enjoys learning new things and applying it in practical ways. After completing two combat deployments to Iraq and I was able to travel around the world as a Marine Security Guard at U.S. Emabssies aroudn the world. I was first introduced to coding through a minor in Computer Science while attending the American University of Paris, in France. After movinng to Canada, I took advantage of Code Platoon's FullStack developer bootcamp to expand my early interest in coding. Programming allows me to continue learning in dynamic environments while building practical solutions to problems.
 
 Linkedin Profile:
 https://www.linkedin.com/in/joshua-franklin0352/
