@@ -9,7 +9,7 @@ Follow the link below to our deployed site.
 /* insert link here */
 
 OPTION 2:
-Clone the code from the repository and install both reqirements.txt files. There is one in the Backend Folder and one in the Frontend Folder.
+Clone the code from the repository and install from the package.json and reqirements.txt files. There is one in the Front Folder and one in the Backend Folder.
 
 
 OVERVIEW
@@ -32,7 +32,7 @@ https://github.com/andrewaustin12
 
 Wilson Gauf
 
-/*Write your bio here*/
+I served 9 years in the US Navy as Persian-Farsi Language Analyst and Aircrewmen. It took 9 years but my passion for software engineering got stoked and grew once starting and completing Code Platoon's Full Stack Software Engineering Bootcamp. Every day I find myself learning new things and questioning what I thought I knew, reading too much documentation and experimenting to try and apply what I encounter.
 
 Linkedin Profile:
 https://www.linkedin.com/in/wilson-gauf/
@@ -62,6 +62,6 @@ After our intial wireframing was done we moved on to building a full mockup of t
 ![fullMockup1](https://user-images.githubusercontent.com/60279881/127741708-b027d03c-ade4-4251-a384-8fd72f060d97.png)
 
 Front End Tech Stack
-In the decision on what tech to use in the front end we decided that we would use what we all have worked with before. We decided to use Javascript with React as our framework. Then we went with Material-UI for prebuilt components. This helped us keep a streamlined look and feel during our built out. 
+In the decision on what tech to use in the front end we decided that we would use what we all have worked with before. We decided to use Javascript with React as our framework. Then we went with Material-UI for prebuilt components. This helped us keep a streamlined look and feel during our built out. Material UI often skips the need for us to sylize our own components and lends us well built and modern components with functionality!
 
 
