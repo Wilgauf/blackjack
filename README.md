@@ -6,10 +6,13 @@ You have two options for deployment of the app.
 OPTION 1:
 Follow the link below to our deployed site.
 
-/* insert link here */
+https://blackjackfrontend.herokuapp.com/
 
 OPTION 2:
 Clone the code from the repository and install from the package.json and reqirements.txt files. There is one in the Front Folder and one in the Backend Folder.
+
+We had to split the front end and backend into two different repos so the most up-to-date code will be found at: https://github.com/Wilgauf/blackjackFrontend
+and the backend is: https://github.com/Wilgauf/blackjackB.
 
 
 OVERVIEW
