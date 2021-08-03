@@ -7,7 +7,7 @@ import cardBack from '../../images/Oak-Leaf-Back.jpg'
 import './Gameboard.css'
 import { Button } from '@material-ui/core'
 import chips from '../../images/pexels-nancho-1553831.jpg'
-import { startGame } from '../../api';
+import { startGame, playerHit, playerStay, playerBet } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,15 +35,17 @@ function getModalStyle() {
 
 const GameboardPage = () => {
   const classes = useStyles();
+  const [gameState, setGameState] = useState(null)
+  const [payout, setPayout] = useState(null)
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [strBet, setStrBet] = useState(0);
-  const [bet, setBet] = useState(null);
+  const [bet, setBet] = useState(0);
   const [dealerHand, setDealerHand] = useState('');
   const [dealerImg, setDealerImg] = useState([cardBack]);
   const [playerHand, setPlayerHand] = useState('');
   const [playerImg, setPlayerImg] = useState([]);
-  const [flag, setFlag] = useState(false)
+  const [dealerVal, setDealerVal] = useState(0);
+  const [playerVal, setPlayerVal] = useState(0);
   let tempArr = [];
 
   const handleClose = () => {
@@ -55,6 +57,7 @@ const GameboardPage = () => {
     let token = localStorage.getItem('auth-user')
     let res = await startGame(bet, user_id, token)
     console.log(res)
+    setGameState(res)
     setDealerHand(res['dealer_hand'])
     setPlayerHand(res['player_hand'])
   }
@@ -78,25 +81,35 @@ const GameboardPage = () => {
     }
     setPlayerImg(tempArr)
     console.log('p1 ', playerImg)
-    setFlag(true)
   },[playerHand])
-
-  useEffect(()=>{ 
-    setBet(parseInt(strBet))
-  },[strBet])
 
   useEffect(()=>{ 
     setOpen(true)
   },[])
 
-  const hit = ()=>{
-    console.log(localStorage.getItem('auth-user'))
-    console.log(localStorage.getItem('user-id'))
+  // useEffect(()=>{
+  //   if(gameState.payout !== null){
+  //     setPayout(gameState.payout)
+  //     console.log('set payout ', gameState.payout)
+  //   }
+  // },[gameState])
+
+  const hit = async ()=>{
+    let token = localStorage.getItem('auth-user')
+    let res = await playerHit(gameState.id, token)
+    console.log('hit res: ', res)
+    setGameState(res)
+    setPlayerHand(res.player_hand)
+    setDealerVal(res)
   }
 
-  const stay = () =>{
-    console.log(dealerImg)
-    console.log(dealerHand)
+  const stay = async() =>{
+    let token = localStorage.getItem('auth-user')
+    let res = await playerStay(gameState.id, token)
+    console.log('stay res: ', res)
+    setGameState(res)
+    setDealerVal(res.d_hand_val)
+    setPlayerVal(res.p_hand_val)
   }
 
   const renderCards = (cardsArr)=>{
@@ -129,7 +142,7 @@ const GameboardPage = () => {
           
           <div className='modal-input'>
             <TextField id="standard-number" label="Bet" type="number"
-            onInput={e=>setStrBet(e.target.value)} InputLabelProps={{
+            onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
             shrink: true,}} defaultValue={10} />
             <Button variant='contained' color="secondary"  onClick={handleGameStart} >Deal the cards</Button>
           </div>
