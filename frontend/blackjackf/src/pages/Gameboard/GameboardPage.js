@@ -7,7 +7,7 @@ import cardBack from '../../images/Oak-Leaf-Back.jpg'
 import './Gameboard.css'
 import { Button } from '@material-ui/core'
 import chips from '../../images/pexels-nancho-1553831.jpg'
-import { startGame } from '../../api';
+import { startGame, playerHit, playerStay, playerBet } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,15 +35,21 @@ function getModalStyle() {
 
 const GameboardPage = () => {
   const classes = useStyles();
+  const [gameState, setGameState] = useState(null)
+  const [payout, setPayout] = useState(null)
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [strBet, setStrBet] = useState(0);
-  const [bet, setBet] = useState(null);
-  const [dealerHand, setDealerHand] = useState(0);
+  const [bet, setBet] = useState(0);
+  const [dealerHand, setDealerHand] = useState('');
   const [dealerImg, setDealerImg] = useState([cardBack]);
-  const [playerHand, setPlayerHand] = useState(0);
-  const [playerImg, setPlayerImg] = useState(null);
-  const [flag, setFlag] = useState(false)
+  const [playerHand, setPlayerHand] = useState('');
+  const [playerImg, setPlayerImg] = useState([]);
+  const [dealerVal, setDealerVal] = useState(0);
+  const [playerVal, setPlayerVal] = useState(0);
+  const [playerChips, setPlayerChips] = useState(0);
+  const [playerBust, setPlayerBust] = useState(false)
+  const [dealerBust, setDealerBust] = useState(false)
+  const [newHand, setNewHand] = useState(false)
   let tempArr = [];
 
   const handleClose = () => {
@@ -55,12 +61,18 @@ const GameboardPage = () => {
     let token = localStorage.getItem('auth-user')
     let res = await startGame(bet, user_id, token)
     console.log(res)
-    setDealerHand(res['dealer_hand'])
-    setPlayerHand(res['player_hand'])
+    setGameState(res)
+    setDealerHand(res.dealer_hand)
+    setPlayerHand(res.player_hand)
+    setDealerVal(res.d_hand_val)
+    setPlayerVal(res.p_hand_val)
+    setPlayerChips(res.player_chips)
+    setPlayerBust(res.player_bust)
+    setDealerBust(res.dealer_bust)
   }
 
   useEffect(()=>{
-    console.log('setting dealerIMG')
+    // console.log('setting dealerIMG')
     // console.log(dealerImg)
     tempArr = dealerImg
     for (let i = 1; i<dealerHand.length; i++){
@@ -70,44 +82,79 @@ const GameboardPage = () => {
   },[dealerHand])
 
   useEffect(()=>{
-    console.log('setting player');
-    console.log(playerImg);
-    tempArr=[]
-    if (playerImg){
-      tempArr=playerImg;
-    }   
+    // console.log('setting player');
+    // console.log(playerImg);
+    tempArr = playerImg;
     for (let i = 0; i < playerHand.length; i++){
       tempArr.push(`https://deckofcardsapi.com/static/img/${playerHand[i]}.png`);
     }
     setPlayerImg(tempArr)
-    setFlag(true)
+    // console.log('p1 ', playerImg)
   },[playerHand])
-
-  useEffect(()=>{ 
-    setBet(parseInt(strBet))
-  },[strBet])
 
   useEffect(()=>{ 
     setOpen(true)
   },[])
 
-  const hit = ()=>{
-    console.log(localStorage.getItem('auth-user'))
-    console.log(localStorage.getItem('user-id'))
+  // useEffect(()=>{
+  //   if(gameState.payout !== null){
+  //     setPayout(gameState.payout)
+  //     console.log('set payout ', gameState.payout)
+  //   }
+  // },[gameState])
+
+  const hit = async ()=>{
+    let token = localStorage.getItem('auth-user')
+
+    if(playerBust == false){
+      let res = await playerHit(gameState.id, token)
+      // console.log('hit res: ', res)
+      setGameState(res)
+      setPlayerHand(res.player_hand)
+      setPlayerVal(res.p_hand_val)
+    }else {
+      console.log('Cannot hit. your are over 21!')
+    }
+    
   }
 
-  const stay = () =>{
-    console.log(dealerImg)
-    console.log(dealerHand)
+  const stay = async() =>{
+    let token = localStorage.getItem('auth-user')
+    let res = await playerStay(gameState.id, token)
+    console.log('stay res: ', res)
+    setGameState(res)
+    setDealerHand(res.dealer_hand)
+    setDealerVal(res.d_hand_val)
+    setNewHand(true)
+  }
+
+  const newBet = async () => {
+    let token = localStorage.getItem('auth-user')
+    if(bet <= gameState.player_chips){
+      let res = await playerBet(gameState.id, bet, token)
+      setGameState(res)
+      setDealerHand(res.dealer_hand)
+      setDealerVal(res.d_hand_val)
+      setPlayerHand(res.player_hand)
+      setPlayerVal(res.p_hand_val)
+      setNewHand(false)
+    }
+    console.log('Cannot bet more chips than you have!')
   }
 
   const renderCards = (cardsArr)=>{
-    // for(i = 1; i<dealerImg.length; i++){
-    //   dealerArr.push(<img className='card-img' src={url} alt='not 21'/>)
-    // }
-    return cardsArr.map((url, id)=>{
-      
-      return <img className='card-img' src={url} alt='not 21'/>
+    return cardsArr.map((card, id)=>{
+      // console.log('card ', card)
+      return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
+    })
+  }
+
+  const renderDealerHand = (cardsArr)=>{
+    return cardsArr.map((card, id)=>{
+      if (id == 0){
+        return <img key={id} className='card-img' src={cardBack} alt='not 21'/>
+      }
+      return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
     })
   }
   
@@ -120,12 +167,12 @@ const GameboardPage = () => {
         <div style={modalStyle} className={classes.paper} >
           <div className='modal-text'>
             <h1 className='modal-title'>Welcome to the table!</h1>
-            <h3  className='modal-subtitle'>To get started just enter   how much you want to bet and get started. Don't worry you   can change this amount inbetween hands. Have fun!</h3>
+            <h3  className='modal-subtitle'>To get started just enter   how much you want to bet and get started. Don't worry you   can change this amount inbetween hands. Have fun! Starting Chips: 1000</h3>
           </div>
           
           <div className='modal-input'>
             <TextField id="standard-number" label="Bet" type="number"
-            onInput={e=>setStrBet(e.target.value)} InputLabelProps={{
+            onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
             shrink: true,}} defaultValue={10} />
             <Button variant='contained' color="secondary"  onClick={handleGameStart} >Deal the cards</Button>
           </div>
@@ -134,35 +181,40 @@ const GameboardPage = () => {
           </div>
         </div>
       </Modal>
-      <div className='dealer-section'>
-        <h2>Dealer Cards</h2>
-        <div className='cards'>
-          {/* <img src={dealerImg[0]} alt='hope its not 21'/>  */}
-          {dealerImg[1] ? renderCards(dealerImg) : null}
-          {/* {dealerImg[1] ? <img src={dealerImg[1]} alt='hope its not 21'/> : null} */}
+      {
+        dealerImg[1] ?
+        <div>
+          <div className='dealer-section'>
+            <h2>Dealer Cards</h2>
+            <div className='cards'>
+              {renderDealerHand(dealerHand)}              
+            </div>
+          </div>
+          <h2>Your Cards. Chip Count: {gameState.player_chips}</h2>
           
-        </div>
-      </div>
-      <h2>Your Cards</h2>
-      
-      <div className='player-section'>
-      
-        <div className='cards'>
-        {/* {console.log('images0' + playerImg[0])} */}
-          {/* {playerImg[0] ? <img src={playerImg[0]} alt='hope its 21'/> : null}  */}
-          {/* {console.log(playerImg[1])} */}
-          {/* {playerImg[1] ? <img src={playerImg[1]} alt='hope its 21'/> : null}  */}
-          {console.log(flag)}
-          {console.log(playerImg)}
-          {console.log(renderCards(playerImg))}
-          {flag ? renderCards(playerImg) : ''} 
-        </div>
-        <div className='player-buttons'>
-        <Button className='hit-bttn'variant="contained" color="secondary" onClick={hit}>Hit</Button>
-        <Button className='stay-bttn'variant="contained" color="secondary" onClick={stay}>Stay</Button>
+          <div className='player-section'>
           
-        </div>
-      </div>
+            <div className='cards'>
+              {renderCards(playerHand)}
+            </div>
+            {!newHand ?
+              <div className='player-buttons'>
+                <Button className='hit-bttn'variant="contained" color="secondary" onClick={hit}>Hit</Button>
+                <Button className='stay-bttn'variant="contained" color="secondary" onClick={stay}>Stay</Button>
+              </div>
+              :
+              <div>
+                {/* need to disply player chip count here as well */}
+                <TextField id="standard-number" label="Bet" type="number" onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
+                  shrink: true,}} defaultValue={10}/>
+                <Button variant='contained' color="secondary"  onClick={newBet} >Place Bet</Button>
+              </div>
+            }
+            
+          </div>
+        </div> : 'Start a new Game'
+      }
+      
         {/* <Button className='play-bttn'variant="contained" color="secondary">Play now</Button> */}
       </div>
     </div>

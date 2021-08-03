@@ -76,7 +76,7 @@ def player_stay(curr_state):
     dealer_value = curr_state.d_hand_val
 
     while dealer_value <= 16:
-        curr_d_hand = draw_add(deck_id, curr_d_hand)
+        curr_d_hand = draw_add(curr_state.deck_id, curr_d_hand)
         dealer_value = check_hand(curr_d_hand)
     
     data['dealer_hand'] = curr_d_hand
@@ -110,7 +110,7 @@ def player_hit(curr_state):
         data['hand_winner'] = 'P'
         data['paypout'] = payout(curr_state.player_bet, 'BJ')
         data['player_chips'] = curr_state.player_chips + data['paypout']
-    elif hand_value > 21:
+    elif data['p_hand_val'] > 21:
         data['player_bust'] = True
         data['hand_winner'] = 'D'
 

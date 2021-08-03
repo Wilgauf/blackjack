@@ -1,10 +1,12 @@
 import React from 'react';
+import topBanner from '../images/blackjackBanner.jpeg'
+import bottomBanner from '../images/HandsBanner.jpg'
 
 const HowToPlay = () => {
   return (
     <div>
       <div>
-        <img source src={require("../images/blackjackBanner.jpeg").default} className="howtoplay-top-banner" alt=""/>       
+        <img source src={topBanner} className="howtoplay-top-banner" alt=""/>       
       </div>
       <div className="howtoplay-body-container">
         <h1>Blackjack</h1>
@@ -36,7 +38,7 @@ const HowToPlay = () => {
               </p>
       </div>
       <div>
-        <img source src={require("../images/blackjackTable.jpeg").default} className="howtoplay-bottom-banner" alt=""/> 
+        <img source src={bottomBanner} className="howtoplay-bottom-banner" alt=""/> 
       </div>
     </div>
   );
