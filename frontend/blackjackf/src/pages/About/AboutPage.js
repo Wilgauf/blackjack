@@ -13,10 +13,10 @@ const AboutPage = () => {
       </div>
       
         <div className='text-container'>
-          <h1>---About---</h1>
+          <h1 className='a-title'>About Blackjack</h1>
           <h2>Try to reach 21 without exceeding it</h2>
-          <h4>{aboutText1}</h4>
-          <h4>{aboutText2}</h4>
+          <h4 className='a-body'>{aboutText1}</h4>
+          <h4 className='a-body'>{aboutText2}</h4>
         </div>
       <div className='bottom-container'>
         <img className='bottomBanner' source src ={bottomBanner} alt='21'/>

@@ -10,11 +10,13 @@ import { TextField } from '@material-ui/core'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import logo from "./BlackjackLogo.png"
 import {login, signupUser} from '../../api'
+import './navbar.css'
 
 // import logo
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      height:'initial',
       
     },
     menuButton: {
@@ -26,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     paper: {
       position: 'absolute',
       width: 300,
-      height: 80,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -135,29 +136,35 @@ function getModalStyle() {
             aria-describedby="simple-modal-description">
                 <div style={modalStyle} className={classes.paper}>
                 <form className={classes.root} noValidate autoComplete="off">
-                            <div>
-                            <TextField
-                            label="Username"
-                            id="outlined-size-small"
-                            variant="outlined"
-                            size="small"
-                            value={username}
-                            onInput={e=>setUsername(e.target.value)}
-                            color="secondary"
-                            />
-                            <TextField
-                            id="outlined-password-input"
-                            label="Password"
-                            type="password"
-                            size="small"
-                            value={password}
-                            onInput={e=>setPassword(e.target.value)}
-                            autoComplete="current-password"
-                            variant="outlined"
-                            />
+                            <div className='modal-inputs'>
+                            <div className="top-row">
+                              <TextField
+                              label="Username"
+                              id="outlined-size-small"
+                              variant="outlined"
+                              size="small"
+                              value={username}
+                              onInput={e=>setUsername(e.target.value)}
+                              color="secondary"
+                              />
+                              <Button className='modal-buttons' variant='contained' color="secondary"  onClick={handleLogin} size="small" >Sign-in</Button>
                             </div>
-                            <Button color="secondary"  onClick={handleLogin} size="small" >Sign-in</Button>
-                            <Button color="secondary"  onClick={handleSignup} size="small" >Signup</Button>
+                            <div className='bottom-row'>
+                              <TextField
+                              id="outlined-password-input"
+                              label="Password"
+                              type="password"
+                              size="small"
+                              value={password}
+                              onInput={e=>setPassword(e.target.value)}
+                              autoComplete="current-password"
+                              variant="outlined"
+                              />
+                              <Button className='modal-buttons' variant='contained' color="secondary"  onClick={handleSignup} size="small" >Signup</Button>
+                            </div>
+                            </div>
+                            
+                            
                         </form>
                 </div>
             </Modal>

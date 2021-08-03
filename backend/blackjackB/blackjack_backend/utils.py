@@ -57,7 +57,8 @@ def check_hand(cards):
     for _, card in enumerate(cards):
         if card[0] == 'A' and hand_value <= 10:
             hand_value += 11
-        hand_value += card_key[card[0]]
+        else:
+            hand_value += card_key[card[0]]
     
     return hand_value
 
@@ -87,15 +88,21 @@ def player_stay(curr_state):
             data['blackjack'] = 'D'
         elif dealer_value > player_value and player_value <= 21:
             data['hand_winner'] = 'D'
-        else:
+        elif dealer_value < player_value and player_value <=21:
             data['hand_winner'] = 'P'
             data['payout'] = payout(curr_state.player_bet, 'N')
             data['player_chips'] = curr_state.player_chips + data['payout']
-    else:
+    elif dealer_value > 21 and player_value <= 21:
         data['dealer_bust'] = True
         data['hand_winner'] = 'P'
         data['payout'] = payout(curr_state.player_bet, 'N')
-        data['player_chips'] = curr_state.player_chips + payout(curr_state.player_bet, 'N')
+        data['player_chips'] = curr_state.player_chips + data['payout']
+    elif dealer_value == 21 == player_value:
+        data['hand_winner'] = 'T'
+        data['payout'] = curr_state.player_bet
+        data['player_chips'] = curr_state.player_chips + data['payout']
+    elif dealer_value == player_value:
+        data['hand_winner'] = 'D'
 
     return data
     

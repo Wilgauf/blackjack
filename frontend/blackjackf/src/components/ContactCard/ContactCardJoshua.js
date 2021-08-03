@@ -11,6 +11,7 @@ import { blue, red } from '@material-ui/core/colors';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { Link } from 'react-router-dom'
+import josh from '../../images/joshuaFranklin.jpeg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +55,7 @@ export default function RecipeReviewCard() {
       />
       <CardMedia
         className={classes.media}
-        image={require("../../images/joshuaFranklin.jpeg").default}
+        image={josh}
         
       />
       <CardContent>
@@ -63,15 +64,15 @@ export default function RecipeReviewCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Link to="https://www.linkedin.com/in/joshua-franklin0352/" target="_blank">
+        <a href="https://www.linkedin.com/in/joshua-franklin0352/" target="_blank">
           <IconButton aria-label="Link to Linkedin">
             <LinkedInIcon style={{color: 'rgba(11, 102, 194, 1)'}}/>
           </IconButton>
-        </Link>
+        </a>
           <IconButton aria-label="Github">
-            <Link to="https://github.com/jfrank0352" target="_blank"  >
+            <a href="https://github.com/jfrank0352" target="_blank"  >
               <GitHubIcon style={{color: 'rgba(0, 119, 183, 1)'}}/>
-            </Link>
+            </a>
           </IconButton>
 
       </CardActions>

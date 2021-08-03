@@ -1,0 +1,19 @@
+.modal-inputs{
+    height:98px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.top-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.bottom-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.modal-buttons{
+    margin-bottom: 20px;
+}

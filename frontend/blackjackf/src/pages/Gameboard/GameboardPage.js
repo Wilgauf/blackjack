@@ -50,6 +50,8 @@ const GameboardPage = () => {
   const [playerBust, setPlayerBust] = useState(false)
   const [dealerBust, setDealerBust] = useState(false)
   const [newHand, setNewHand] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
+  const [gameStatus, setGameStatus] = useState({'win':false, 'loss':false, 'tie':false})
   let tempArr = [];
 
   const handleClose = () => {
@@ -82,19 +84,25 @@ const GameboardPage = () => {
   },[dealerHand])
 
   useEffect(()=>{
-    // console.log('setting player');
-    // console.log(playerImg);
     tempArr = playerImg;
     for (let i = 0; i < playerHand.length; i++){
       tempArr.push(`https://deckofcardsapi.com/static/img/${playerHand[i]}.png`);
     }
     setPlayerImg(tempArr)
-    // console.log('p1 ', playerImg)
   },[playerHand])
 
   useEffect(()=>{ 
     setOpen(true)
+    getChips()
   },[])
+  const getChips = async ()=>{
+    let user_id = localStorage.getItem('user-id')
+    let token = localStorage.getItem('auth-user')
+    let bet = 0
+    let res = await startGame(bet, user_id, token)
+    console.log(res)
+    setPlayerChips(res.player_chips)
+  }
 
   // useEffect(()=>{
   //   if(gameState.payout !== null){
@@ -108,7 +116,10 @@ const GameboardPage = () => {
 
     if(playerBust == false){
       let res = await playerHit(gameState.id, token)
-      // console.log('hit res: ', res)
+      console.log('hit res: ', res)
+      if(res.player_bust){
+        stay()
+      }
       setGameState(res)
       setPlayerHand(res.player_hand)
       setPlayerVal(res.p_hand_val)
@@ -122,17 +133,31 @@ const GameboardPage = () => {
     let token = localStorage.getItem('auth-user')
     let res = await playerStay(gameState.id, token)
     console.log('stay res: ', res)
+    setGameOver(true)
     setGameState(res)
     setDealerHand(res.dealer_hand)
     setDealerVal(res.d_hand_val)
     setNewHand(true)
+    if(res.hand_winner ==='P'){
+      setGameStatus({'win':true})
+    }
+    else if(res.hand_winner ==='D'){
+      setGameStatus({'loss':true})
+    }
+    else{
+      setGameStatus({'tie':true})
+    }
+
   }
 
   const newBet = async () => {
+    setGameOver(false)
+    setGameStatus({'win':false, 'loss':false, 'tie':false})
     let token = localStorage.getItem('auth-user')
     if(bet <= gameState.player_chips){
       let res = await playerBet(gameState.id, bet, token)
       setGameState(res)
+      console.log(gameOver)
       setDealerHand(res.dealer_hand)
       setDealerVal(res.d_hand_val)
       setPlayerHand(res.player_hand)
@@ -144,7 +169,6 @@ const GameboardPage = () => {
 
   const renderCards = (cardsArr)=>{
     return cardsArr.map((card, id)=>{
-      // console.log('card ', card)
       return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
     })
   }
@@ -166,8 +190,9 @@ const GameboardPage = () => {
         aria-describedby="simple-modal-description">
         <div style={modalStyle} className={classes.paper} >
           <div className='modal-text'>
+          {/* I'm thinking a good way to space out the games is to re-open the modal with different text between each game? */}
             <h1 className='modal-title'>Welcome to the table!</h1>
-            <h3  className='modal-subtitle'>To get started just enter   how much you want to bet and get started. Don't worry you   can change this amount inbetween hands. Have fun! Starting Chips: 1000</h3>
+            <h3  className='modal-subtitle'>To get started just enter   how much you want to bet and get started. Don't worry you   can change this amount inbetween hands. Have fun! You have: {playerChips} Chips</h3>
           </div>
           
           <div className='modal-input'>
@@ -185,38 +210,69 @@ const GameboardPage = () => {
         dealerImg[1] ?
         <div>
           <div className='dealer-section'>
-            <h2>Dealer Cards</h2>
+            <div className='dealer-text'>
+            <h2 className='cards-heading'>Dealer Cards</h2>
+            </div>
+            
             <div className='cards'>
-              {renderDealerHand(dealerHand)}              
+            {/* &&&&&&&&&&&&&&&&&& This is my idea to flip over the dealers turned down card once the game is over it works sometimes, but sometimes it just gets rid on the face down card for good. I'm tired and don't think I can think of something else that would do the same thing */}
+              {gameOver ? renderCards(dealerHand): renderDealerHand(dealerHand)}
+              {/* {renderDealerHand(dealerHand)}               */}
             </div>
           </div>
-          <h2>Your Cards. Chip Count: {gameState.player_chips}</h2>
+          
           
           <div className='player-section'>
-          
+            <div className='dealer-text'>
+              <h2 className='cards-heading'>Your Cards. Chip Count: {gameState.player_chips}</h2> 
+            </div>
             <div className='cards'>
               {renderCards(playerHand)}
-            </div>
-            {!newHand ?
+              {!newHand ?
               <div className='player-buttons'>
                 <Button className='hit-bttn'variant="contained" color="secondary" onClick={hit}>Hit</Button>
                 <Button className='stay-bttn'variant="contained" color="secondary" onClick={stay}>Stay</Button>
               </div>
               :
-              <div>
+              <div className='gameOver-content'>
                 {/* need to disply player chip count here as well */}
+              
                 <TextField id="standard-number" label="Bet" type="number" onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
                   shrink: true,}} defaultValue={10}/>
                 <Button variant='contained' color="secondary"  onClick={newBet} >Place Bet</Button>
               </div>
             }
+            </div>
+            
             
           </div>
         </div> : 'Start a new Game'
       }
       
         {/* <Button className='play-bttn'variant="contained" color="secondary">Play now</Button> */}
+    
       </div>
+      { gameStatus.win ? 
+        <div className='game-status win' id='win'>
+          <h1>Congrats you won!</h1>
+        </div>
+        :
+        null
+        }
+        { gameStatus.loss ? 
+        <div className='game-status loss' id='loss'>
+          <h1>Sorry you lost</h1>
+        </div>
+        :
+        null
+        }
+        { gameStatus.tie ? 
+        <div className='game-status tie' id='tie'>
+          <h1>Dang, it's a tie.</h1>
+        </div>
+        :
+        null
+        }
     </div>
   );
 };

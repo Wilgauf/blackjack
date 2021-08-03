@@ -14,7 +14,8 @@
     align-items: center;
     margin: 0 auto;
 }
-h1{
+.a-title{
+    font-size: 50px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
@@ -24,7 +25,8 @@ h2{
     color: #7A9EB4;
 }
 
-h4{
+.a-body{
+    font-size: 18px;
     margin-top: 6px;
     color: white;
 }
