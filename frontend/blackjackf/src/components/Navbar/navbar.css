@@ -1,0 +1,16 @@
+.modal-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.button-container{
+    height: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-around !important;
+
+}
+.modal-buttons{
+    margin-bottom: 20px;
+}

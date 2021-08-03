@@ -10,6 +10,7 @@ import { TextField } from '@material-ui/core'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import logo from "./BlackjackLogo.png"
 import {login, signupUser} from '../../api'
+import './navbar.css'
 
 // import logo
 const useStyles = makeStyles((theme) => ({
@@ -135,7 +136,7 @@ function getModalStyle() {
             aria-describedby="simple-modal-description">
                 <div style={modalStyle} className={classes.paper}>
                 <form className={classes.root} noValidate autoComplete="off">
-                            <div>
+                            <div className='modal-inputs'>
                             <TextField
                             label="Username"
                             id="outlined-size-small"
@@ -156,8 +157,11 @@ function getModalStyle() {
                             variant="outlined"
                             />
                             </div>
-                            <Button color="secondary"  onClick={handleLogin} size="small" >Sign-in</Button>
-                            <Button color="secondary"  onClick={handleSignup} size="small" >Signup</Button>
+                            <div className='button-container'>
+                              <Button className='modal-buttons' variant='contained' color="secondary"  onClick={handleLogin} size="small" >Sign-in</Button>
+                              <Button className='modal-buttons' variant='contained' color="secondary"  onClick={handleSignup} size="small" >Signup</Button>
+                            </div>
+                            
                         </form>
                 </div>
             </Modal>
