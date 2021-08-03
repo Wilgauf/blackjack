@@ -6,10 +6,13 @@ You have two options for deployment of the app.
 OPTION 1:
 Follow the link below to our deployed site.
 
-/* insert link here */
+https://blackjackfrontend.herokuapp.com/
 
 OPTION 2:
 Clone the code from the repository and install from the package.json and reqirements.txt files. There is one in the Front Folder and one in the Backend Folder.
+
+We had to split the front end and backend into two different repos so the most up-to-date code will be found at: https://github.com/Wilgauf/blackjackFrontend
+and the backend is: https://github.com/Wilgauf/blackjackB.
 
 
 OVERVIEW
@@ -45,7 +48,7 @@ https://wilsongauf.com/
 
 Joshua Franklin
 
-/*Write your bio here*/
+I am an 8 year U.S. Marine Corps veteran turned Software Developer who enjoys learning new things and applying it in practical ways. After completing two combat deployments to Iraq and I was able to travel around the world as a Marine Security Guard at U.S. Emabssies aroudn the world. I was first introduced to coding through a minor in Computer Science while attending the American University of Paris, in France. After movinng to Canada, I took advantage of Code Platoon's FullStack developer bootcamp to expand my early interest in coding. Programming allows me to continue learning in dynamic environments while building practical solutions to problems.
 
 Linkedin Profile:
 https://www.linkedin.com/in/joshua-franklin0352/
