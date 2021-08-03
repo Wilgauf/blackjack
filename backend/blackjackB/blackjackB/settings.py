@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'blackjack_backend',
     'rest_framework',
     'corsheaders',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
