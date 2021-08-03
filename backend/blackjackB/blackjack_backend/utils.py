@@ -115,8 +115,8 @@ def player_hit(curr_state):
     if data['p_hand_val'] == 21:
         data['blackjack'] = 'P'
         data['hand_winner'] = 'P'
-        data['paypout'] = payout(curr_state.player_bet, 'BJ')
-        data['player_chips'] = curr_state.player_chips + data['paypout']
+        data['payout'] = payout(curr_state.player_bet, 'BJ')
+        data['player_chips'] = curr_state.player_chips + data['payout']
     elif data['p_hand_val'] > 21:
         data['player_bust'] = True
         data['hand_winner'] = 'D'
@@ -148,8 +148,8 @@ def new_bet(curr_state, bet):
     if data['p_hand_val'] == 21:
         data['blackjack'] = 'P'
         data['hand_winner'] = 'P'
-        data['paypout'] = payout(bet, 'BJ')
-        data['player_chips'] = curr_state.player_chips + data['paypout']
+        data['payout'] = payout(bet, 'BJ')
+        data['player_chips'] = curr_state.player_chips + data['payout']
 
     if data['d_hand_val'] == 21:
         data['blackjack'] = 'D'

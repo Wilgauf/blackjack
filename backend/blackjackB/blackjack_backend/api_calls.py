@@ -14,6 +14,11 @@ def create_a_deck():
 # defaultURL = defaultURL+deck_id+"/"
 # print(deck_id)
 
+def shuffle(deck_id):
+    r = requests.get(f'{defaultURL}{deck_id}/shuffle/')
+    if not r.json()['success']:
+        print("Error, deck was not shuffled. please try again")
+
 #draws given number of cards. Creates new deck and draws cards if deck_id=new
 def draw_card(deck_id, num=1):
     response = requests.get(f'{defaultURL}{deck_id}/draw/?count={num}')
@@ -26,6 +31,8 @@ def draw_card(deck_id, num=1):
             data = {'deck_id': deck, 'cards' : this_hand}
         else :
             data = this_hand
+        if response.json()["remaining"] <= 10:
+            shuffle(deck_id)
         return data
     else:
         print("Response error, retry request")
