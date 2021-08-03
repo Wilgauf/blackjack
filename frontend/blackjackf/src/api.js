@@ -58,9 +58,47 @@ const startGame = async (player_bet, user_id, token)=>{
   return res.json()
 }
 
+const playerHit = async (game_id, token)=>{
+
+  let res = await fetch(`${BASE_URL}api/play/${game_id}/hit/`, {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `JWT ${token}`
+  },
+  })
+  return res.json()
+}
+
+const playerStay = async (game_id, token)=>{
+
+  let res = await fetch(`${BASE_URL}api/play/${game_id}/stay/`, {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `JWT ${token}`
+  },
+  })
+  return res.json()
+}
+
+const playerBet = async (game_id, bet, token)=>{
+  let data = {
+    "player_bet": bet
+  }
+  let res = await fetch(`${BASE_URL}api/play/${game_id}/bet/`, {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `JWT ${token}`
+  },
+  body: JSON.stringify(data)
+  })
+  return res.json()
+}
 
 
-export { login, getLoggedInUser, signupUser, startGame }
+export { login, getLoggedInUser, signupUser, startGame, playerHit, playerStay, playerBet }
 
 /*
 
