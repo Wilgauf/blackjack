@@ -40,6 +40,9 @@ https://www.linkedin.com/in/wilson-gauf/
 Github Profile:
 https://github.com/Wilgauf
 
+Personal Portfolio:
+https://wilsongauf.com/
+
 Joshua Franklin
 
 /*Write your bio here*/
