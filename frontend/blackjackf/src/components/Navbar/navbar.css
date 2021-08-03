@@ -1,15 +1,18 @@
 .modal-inputs{
+    height:98px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-
-.button-container{
-    height: 100%;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-around !important;
-
+.top-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.bottom-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .modal-buttons{
     margin-bottom: 20px;
