@@ -3,10 +3,8 @@ import './About.css'
 import {aboutText1, aboutText2} from './storage'
 import bottomBanner from '../../images/HandsBanner.jpg'
 import topBanner from '../../images/blackjackBanner.jpeg'
-<<<<<<< HEAD
 
-=======
->>>>>>> d3be2bbbca1fce61394e888808bfd413ce21c956
+
 const AboutPage = () => {
   return (
     <div>
