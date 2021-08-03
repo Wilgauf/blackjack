@@ -82,12 +82,11 @@ const playerStay = async (game_id, token)=>{
   return res.json()
 }
 
-const playerBet = async (game_id, user_id, bet, token)=>{
+const playerBet = async (game_id, bet, token)=>{
   let data = {
-    "player":user_id,
     "player_bet": bet
   }
-  let res = await fetch(`${BASE_URL}api/play/${game_id}/stay/`, {
+  let res = await fetch(`${BASE_URL}api/play/${game_id}/bet/`, {
   method: 'PATCH',
   headers: {
     'Content-Type': 'application/json',
