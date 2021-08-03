@@ -84,14 +84,11 @@ const GameboardPage = () => {
   },[dealerHand])
 
   useEffect(()=>{
-    // console.log('setting player');
-    // console.log(playerImg);
     tempArr = playerImg;
     for (let i = 0; i < playerHand.length; i++){
       tempArr.push(`https://deckofcardsapi.com/static/img/${playerHand[i]}.png`);
     }
     setPlayerImg(tempArr)
-    // console.log('p1 ', playerImg)
   },[playerHand])
 
   useEffect(()=>{ 
@@ -172,7 +169,6 @@ const GameboardPage = () => {
 
   const renderCards = (cardsArr)=>{
     return cardsArr.map((card, id)=>{
-      // console.log('card ', card)
       return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
     })
   }
