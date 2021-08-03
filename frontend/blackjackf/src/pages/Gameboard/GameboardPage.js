@@ -46,6 +46,9 @@ const GameboardPage = () => {
   const [playerImg, setPlayerImg] = useState([]);
   const [dealerVal, setDealerVal] = useState(0);
   const [playerVal, setPlayerVal] = useState(0);
+  const [playerChips, setPlayerChips] = useState(0);
+  const [playerBust, setPlayerBust] = useState(false)
+  const [dealerBust, setDealerBust] = useState(false)
   let tempArr = [];
 
   const handleClose = () => {
@@ -58,8 +61,13 @@ const GameboardPage = () => {
     let res = await startGame(bet, user_id, token)
     console.log(res)
     setGameState(res)
-    setDealerHand(res['dealer_hand'])
-    setPlayerHand(res['player_hand'])
+    setDealerHand(res.dealer_hand)
+    setPlayerHand(res.player_hand)
+    setDealerVal(res.d_hand_val)
+    setPlayerVal(res.p_hand_val)
+    setPlayerChips(res.player_chips)
+    setPlayerBust(res.player_bust)
+    setDealerBust(res.dealer_bust)
   }
 
   useEffect(()=>{
@@ -96,11 +104,17 @@ const GameboardPage = () => {
 
   const hit = async ()=>{
     let token = localStorage.getItem('auth-user')
-    let res = await playerHit(gameState.id, token)
-    console.log('hit res: ', res)
-    setGameState(res)
-    setPlayerHand(res.player_hand)
-    setDealerVal(res)
+    
+    if(playerBust == false){
+      let res = await playerHit(gameState.id, token)
+      console.log('hit res: ', res)
+      setGameState(res)
+      setPlayerHand(res.player_hand)
+      setDealerVal(res)
+    }else {
+      console.log('Cannot hit. your are over 21!')
+    }
+    
   }
 
   const stay = async() =>{
