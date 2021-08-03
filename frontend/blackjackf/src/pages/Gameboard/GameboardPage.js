@@ -39,10 +39,10 @@ const GameboardPage = () => {
   const [open, setOpen] = useState(false);
   const [strBet, setStrBet] = useState(0);
   const [bet, setBet] = useState(null);
-  const [dealerHand, setDealerHand] = useState(0);
+  const [dealerHand, setDealerHand] = useState('');
   const [dealerImg, setDealerImg] = useState([cardBack]);
-  const [playerHand, setPlayerHand] = useState(0);
-  const [playerImg, setPlayerImg] = useState(null);
+  const [playerHand, setPlayerHand] = useState('');
+  const [playerImg, setPlayerImg] = useState([]);
   const [flag, setFlag] = useState(false)
   let tempArr = [];
 
@@ -72,14 +72,12 @@ const GameboardPage = () => {
   useEffect(()=>{
     console.log('setting player');
     console.log(playerImg);
-    tempArr=[]
-    if (playerImg){
-      tempArr=playerImg;
-    }   
+    tempArr = playerImg;
     for (let i = 0; i < playerHand.length; i++){
       tempArr.push(`https://deckofcardsapi.com/static/img/${playerHand[i]}.png`);
     }
     setPlayerImg(tempArr)
+    console.log('p1 ', playerImg)
     setFlag(true)
   },[playerHand])
 
@@ -102,12 +100,18 @@ const GameboardPage = () => {
   }
 
   const renderCards = (cardsArr)=>{
-    // for(i = 1; i<dealerImg.length; i++){
-    //   dealerArr.push(<img className='card-img' src={url} alt='not 21'/>)
-    // }
-    return cardsArr.map((url, id)=>{
-      
-      return <img className='card-img' src={url} alt='not 21'/>
+    return cardsArr.map((card, id)=>{
+      console.log('card ', card)
+      return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
+    })
+  }
+
+  const renderDealerHand = (cardsArr)=>{
+    return cardsArr.map((card, id)=>{
+      if (id == 0){
+        return <img key={id} className='card-img' src={cardBack} alt='not 21'/>
+      }
+      return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
     })
   }
   
@@ -134,35 +138,31 @@ const GameboardPage = () => {
           </div>
         </div>
       </Modal>
-      <div className='dealer-section'>
-        <h2>Dealer Cards</h2>
-        <div className='cards'>
-          {/* <img src={dealerImg[0]} alt='hope its not 21'/>  */}
-          {dealerImg[1] ? renderCards(dealerImg) : null}
-          {/* {dealerImg[1] ? <img src={dealerImg[1]} alt='hope its not 21'/> : null} */}
+      {
+        dealerImg[1] ?
+        <div>
+          <div className='dealer-section'>
+            <h2>Dealer Cards</h2>
+            <div className='cards'>
+              {renderDealerHand(dealerHand)}              
+            </div>
+          </div>
+          <h2>Your Cards</h2>
           
-        </div>
-      </div>
-      <h2>Your Cards</h2>
-      
-      <div className='player-section'>
-      
-        <div className='cards'>
-        {/* {console.log('images0' + playerImg[0])} */}
-          {/* {playerImg[0] ? <img src={playerImg[0]} alt='hope its 21'/> : null}  */}
-          {/* {console.log(playerImg[1])} */}
-          {/* {playerImg[1] ? <img src={playerImg[1]} alt='hope its 21'/> : null}  */}
-          {console.log(flag)}
-          {console.log(playerImg)}
-          {console.log(renderCards(playerImg))}
-          {flag ? renderCards(playerImg) : ''} 
-        </div>
-        <div className='player-buttons'>
-        <Button className='hit-bttn'variant="contained" color="secondary" onClick={hit}>Hit</Button>
-        <Button className='stay-bttn'variant="contained" color="secondary" onClick={stay}>Stay</Button>
+          <div className='player-section'>
           
-        </div>
-      </div>
+            <div className='cards'>
+              {renderCards(playerHand)}
+            </div>
+            <div className='player-buttons'>
+            <Button className='hit-bttn'variant="contained" color="secondary" onClick={hit}>Hit</Button>
+            <Button className='stay-bttn'variant="contained" color="secondary" onClick={stay}>Stay</Button>
+              
+            </div>
+          </div>
+        </div> : ''
+      }
+      
         {/* <Button className='play-bttn'variant="contained" color="secondary">Play now</Button> */}
       </div>
     </div>
