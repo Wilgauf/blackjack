@@ -42,16 +42,19 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = [
-        'id',  
-        'deck_id',
+        'id',
         'player',
+        'deck_id',
         'player_bet',
         'player_hand',
+        'p_hand_val',
         'dealer_hand',
+        'd_hand_val',
         'player_bust',
         'dealer_bust',
         'player_chips',
         'blackjack',
         'hand_winner',
+        'payout',
         'active',
         ]
