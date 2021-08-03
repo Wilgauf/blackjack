@@ -9,11 +9,15 @@ import { Button } from '@material-ui/core'
 import chips from '../../images/pexels-nancho-1553831.jpg'
 import { startGame, playerHit, playerStay, playerBet } from '../../api';
 
+const modalW = window.innerWidth * .5;
+const modalH = window.innerHeight * .75;
+
+//Material UI styling
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 700,
-    height: 700,
+    width: modalW,
+    height: modalH,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -44,20 +48,26 @@ const GameboardPage = () => {
   const [dealerImg, setDealerImg] = useState([cardBack]);
   const [playerHand, setPlayerHand] = useState('');
   const [playerImg, setPlayerImg] = useState([]);
-  const [dealerVal, setDealerVal] = useState(0);
-  const [playerVal, setPlayerVal] = useState(0);
+  // const [dealerVal, setDealerVal] = useState(0);
+  // const [playerVal, setPlayerVal] = useState(0);
   const [playerChips, setPlayerChips] = useState(1000);
-  const [playerBust, setPlayerBust] = useState(false)
-  const [dealerBust, setDealerBust] = useState(false)
-  const [newHand, setNewHand] = useState(false)
-  const [gameOver, setGameOver] = useState(false)
-  const [gameStatus, setGameStatus] = useState({'win':false, 'loss':false, 'tie':false})
+  const [playerBust, setPlayerBust] = useState(false);
+  const [newHand, setNewHand] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [gameStatus, setGameStatus] = useState({'win':false, 'loss':false, 'tie':false});
   let tempArr = [];
+  const newStyle= {'height':'60px'};
 
   const handleClose = () => {
     setOpen(false);
   }; 
+
+  //Handles the game on start, only runs if user puts in a valid bet amount
   const handleGameStart = async ()=>{
+    if(!bet || bet>500 || bet < 0){
+      return null
+    }
+    
     setOpen(false)
     let user_id = localStorage.getItem('user-id')
     let token = localStorage.getItem('auth-user')
@@ -66,16 +76,13 @@ const GameboardPage = () => {
     setGameState(res)
     setDealerHand(res.dealer_hand)
     setPlayerHand(res.player_hand)
-    setDealerVal(res.d_hand_val)
-    setPlayerVal(res.p_hand_val)
+    // setDealerVal(res.d_hand_val)
+    // setPlayerVal(res.p_hand_val)
     setPlayerChips(res.player_chips)
     setPlayerBust(res.player_bust)
-    setDealerBust(res.dealer_bust)
   }
-
+  //setting up the array of images once the front end has each player's cards
   useEffect(()=>{
-    // console.log('setting dealerIMG')
-    // console.log(dealerImg)
     tempArr = dealerImg
     for (let i = 1; i<dealerHand.length; i++){
       tempArr.push(`https://deckofcardsapi.com/static/img/${dealerHand[i]}.png`)
@@ -91,30 +98,14 @@ const GameboardPage = () => {
     setPlayerImg(tempArr)
   },[playerHand])
 
+  //Opens the modal on mount
   useEffect(()=>{ 
     setOpen(true)
-    // getChips()
   },[])
 
-  // const getChips = async ()=>{
-  //   let user_id = localStorage.getItem('user-id')
-  //   let token = localStorage.getItem('auth-user')
-  //   let playerBet = 0
-  //   let res = await startGame(playerBet, user_id, token)
-  //   console.log(res)
-  //   setPlayerChips(res.player_chips)
-  // }
-
-  // useEffect(()=>{
-  //   if(gameState.payout !== null){
-  //     setPayout(gameState.payout)
-  //     console.log('set payout ', gameState.payout)
-  //   }
-  // },[gameState])
-
+  //handles the hit logic, 
   const hit = async ()=>{
     let token = localStorage.getItem('auth-user')
-
     if(playerBust == false){
       let res = await playerHit(gameState.id, token)
       console.log('hit res: ', res)
@@ -123,29 +114,34 @@ const GameboardPage = () => {
       }
       setGameState(res)
       setPlayerHand(res.player_hand)
-      setPlayerVal(res.p_hand_val)
+      // setPlayerVal(res.p_hand_val)
       setPlayerChips(res.player_chips)
       setPayout(res.payout)
 
     }else {
-      console.log('Cannot hit. your are over 21!')
+      console.error('Cannot hit. your are over 21!')
     }
     
   }
-
+  //Opens the modal for edge case where 
+  const openModal = ()=>{
+    setOpen(true)
+  }
+  //handles stay logic, sets bet to zero so that it user can't keep playing without actually setting their bet
   const stay = async() =>{
+    setBet(0)
     let token = localStorage.getItem('auth-user')
     let res = await playerStay(gameState.id, token)
-    console.log('stay res: ', res)
     setGameOver(true)
     setGameState(res)
     setDealerHand(res.dealer_hand)
-    setDealerVal(res.d_hand_val)
+    // setDealerVal(res.d_hand_val)
     setNewHand(true)
     setPlayerHand(res.player_hand)
-    setPlayerVal(res.p_hand_val)
+    // setPlayerVal(res.p_hand_val)
     setPlayerChips(res.player_chips)
     setPayout(res.payout)
+
     if(res.hand_winner ==='P'){
       setGameStatus({'win':true})
     }
@@ -158,33 +154,36 @@ const GameboardPage = () => {
 
   }
 
+  //New game start-up
   const newBet = async () => {
-    setGameOver(false)
-    setGameStatus({'win':false, 'loss':false, 'tie':false})
+    if(bet > 500 || !bet || bet < 0){
+      return null
+    }
+    
     let token = localStorage.getItem('auth-user')
-    if(bet <= gameState.player_chips){
+    if(bet <= gameState.player_chips && bet > 0){
+      setGameOver(false)
+      setGameStatus({'win':false, 'loss':false, 'tie':false})
       let res = await playerBet(gameState.id, bet, token)
       setGameState(res)
-      console.log('bet :' , res)
-      console.log(gameOver)
       setDealerHand(res.dealer_hand)
-      setDealerVal(res.d_hand_val)
+      // setDealerVal(res.d_hand_val)
       setPlayerHand(res.player_hand)
-      setPlayerVal(res.p_hand_val)
+      // setPlayerVal(res.p_hand_val)
       setPlayerChips(res.player_chips)
       setPayout(res.payout)
       setNewHand(false)
     }else {
-      console.log('Cannot bet more chips than you have!')
+      console.error('Cannot bet more chips than you have!')
     }
   }
-
+  //renders all cards in the given array 
   const renderCards = (cardsArr)=>{
     return cardsArr.map((card, id)=>{
       return <img key={id} className='card-img' src={`https://deckofcardsapi.com/static/img/${card}.png`} alt='not 21'/>
     })
   }
-
+  //Skips the first card so that it is 'hidden' till the game is over
   const renderDealerHand = (cardsArr)=>{
     return cardsArr.map((card, id)=>{
       if (id == 0){
@@ -202,15 +201,13 @@ const GameboardPage = () => {
         aria-describedby="simple-modal-description">
         <div style={modalStyle} className={classes.paper} >
           <div className='modal-text'>
-          {/* I'm thinking a good way to space out the games is to re-open the modal with different text between each game? */}
             <h1 className='modal-title'>Welcome to the table!</h1>
-            <h3  className='modal-subtitle'>To get started just enter   how much you want to bet and get started. Don't worry you   can change this amount inbetween hands. Have fun! You have: {playerChips} Chips</h3>
+            <h3  className='modal-subtitle'>To get started just enter how much you want to bet <span className='bold'>(under 500)</span> and get we'll deal the cards. Don't worry you can change this amount inbetween hands. Have fun! You have: {playerChips} Chips</h3>
           </div>
           
           <div className='modal-input'>
             <TextField id="standard-number" label="Bet" type="number"
-            onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
-            shrink: true,}} defaultValue={0} />
+            onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{shrink: true,}} defaultValue={0} />
             <Button variant='contained' color="secondary"  onClick={handleGameStart} >Deal the cards</Button>
           </div>
           <div className='img-container'>
@@ -227,9 +224,7 @@ const GameboardPage = () => {
             </div>
             
             <div className='cards'>
-            {/* &&&&&&&&&&&&&&&&&& This is my idea to flip over the dealers turned down card once the game is over it works sometimes, but sometimes it just gets rid on the face down card for good. I'm tired and don't think I can think of something else that would do the same thing */}
               {gameOver ? renderCards(dealerHand): renderDealerHand(dealerHand)}
-              {/* {renderDealerHand(dealerHand)}               */}
             </div>
           </div>
           
@@ -246,11 +241,8 @@ const GameboardPage = () => {
                 <Button className='stay-bttn'variant="contained" color="secondary" onClick={stay}>Stay</Button>
               </div>
               :
-              <div className='gameOver-content'>
-                {/* need to disply player chip count here as well */}
-              
-                <TextField id="standard-number" label="Bet" type="number" onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{
-                  shrink: true,}} defaultValue={0}/>
+              <div className='gameOver-content'>              
+                <TextField id="standard-number" label="Bet" type="number" onInput={e=>setBet(parseInt(e.target.value))} InputLabelProps={{shrink: true,}} defaultValue={0}/>
                 <Button variant='contained' color="secondary"  onClick={newBet} >Place Bet</Button>
               </div>
             }
@@ -258,16 +250,14 @@ const GameboardPage = () => {
             
             
           </div>
-        </div> : 'Start a new Game'
+        </div> : <div className='new-game'><div className='new-btn-container'><Button style={newStyle} className='stay-bttn'variant="contained" color="secondary" onClick={openModal}>New Game</Button></div></div>
       }
-      
-        {/* <Button className='play-bttn'variant="contained" color="secondary">Play now</Button> */}
-    
       </div>
+      
       { gameStatus.win ? 
         <div className='game-status win' id='win'>
-          <h1>Congrats you won!</h1>
-          <h1>Your Winnings: {payout}</h1>
+          <h1>Congrats you won!  Your Winnings: {payout}</h1>
+          <h1></h1>
         </div>
         :
         null
