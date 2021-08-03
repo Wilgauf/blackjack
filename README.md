@@ -14,6 +14,7 @@ Clone the code from the repository and install from the package.json and reqirem
 We had to split the front end and backend into two different repos so the most up-to-date code will be found at: https://github.com/Wilgauf/blackjackFrontend
 and the backend is: https://github.com/Wilgauf/blackjackB.
 
+[API Documentation](https://github.com/Wilgauf/blackjack/tree/main/backend/blackjackB)
 
 OVERVIEW
 
