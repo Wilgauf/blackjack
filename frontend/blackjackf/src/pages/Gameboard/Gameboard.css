@@ -42,11 +42,13 @@
     flex-direction: column;
 }
 .cards-heading{
-    color: #b52224;
+    color: #ce383b;
+    background-color: #3d6c39;
+    text-align: center;
 }
 .card-img{
     height:27vh;
-    width: 17vw;
+    width: 11vw;
 }
 .player-buttons{
     display: flex;
@@ -82,12 +84,15 @@
 }
 .game-status{
     width: 100vw;
-    height: 40px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
 }
 
-#win .game-status{
+.game-status.win{
     background-color: green;
 }
-#loss .game-status{
+.game-status.loss{
     background-color: red;
+    text-align: center;
 }

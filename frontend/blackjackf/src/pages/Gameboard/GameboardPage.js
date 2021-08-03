@@ -215,6 +215,7 @@ const GameboardPage = () => {
             </div>
             
             <div className='cards'>
+            {/* &&&&&&&&&&&&&&&&&& This is my idea to flip over the dealers turned down card once the game is over it works sometimes, but sometimes it just gets rid on the face down card for good. I'm tired and don't think I can think of something else that would do the same thing */}
               {gameOver ? renderCards(dealerHand): renderDealerHand(dealerHand)}
               {/* {renderDealerHand(dealerHand)}               */}
             </div>
