@@ -39,6 +39,9 @@
     display: flex;
     flex-direction: row;
 }
+.card-img{
+    height:15%;
+}
 .player-buttons{
     display: flex;
     flex-direction: column;
