@@ -1,7 +1,7 @@
 .GBMain{
     background-image: url('../../images/table_blackjack.png');
-    height: 85vh;
-    width: 95vw;
+    height: 90vh;
+    width: 100vw;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -44,4 +44,27 @@
     flex-direction: column;
     margin-left: 20px;
     justify-content: space-around;
+}
+
+.modal-text{
+    text-align: center;
+}
+.modal-title{
+    color:black;
+    font-size: 50px;
+}
+.modal-subtitle{
+    font-size: 25px;
+}
+.modal-input{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 17px;
+}
+.img-container{
+    display: flex;
+    justify-content: center;
+}
+.modal-img{
+    height: 50vh;
 }

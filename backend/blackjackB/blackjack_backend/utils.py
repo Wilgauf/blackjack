@@ -22,11 +22,14 @@ card_key = {
     '9':9,
 }
 
-#Creates intial game state by filling necessary info. Expects 'player_bet' is in request from frontend
+#Creates intial game state by filling necessary info. 
+#Expects 'player_bet' and 'player' is in request body from frontend
 def create_new_game(request):
     data = {}
     deck_setup = draw_card('new', 2)
     deck_id = deck_setup['deck_id']
+    print(request.data)
+    data['player'] = request.data['player']
     data['deck_id'] = deck_setup['deck_id']
     data['player_hand'] = deck_setup['cards']
     data['dealer_hand'] = draw_card(deck_id, 2)
@@ -73,7 +76,7 @@ def player_stay(curr_state):
     dealer_value = curr_state.d_hand_val
 
     while dealer_value <= 16:
-        curr_d_hand = draw_add(deck_id, curr_d_hand)
+        curr_d_hand = draw_add(curr_state.deck_id, curr_d_hand)
         dealer_value = check_hand(curr_d_hand)
     
     data['dealer_hand'] = curr_d_hand
@@ -107,7 +110,7 @@ def player_hit(curr_state):
         data['hand_winner'] = 'P'
         data['paypout'] = payout(curr_state.player_bet, 'BJ')
         data['player_chips'] = curr_state.player_chips + data['paypout']
-    elif hand_value > 21:
+    elif data['p_hand_val'] > 21:
         data['player_bust'] = True
         data['hand_winner'] = 'D'
 
