@@ -18,6 +18,14 @@ and the backend is: https://github.com/Wilgauf/blackjackB.
 
 OVERVIEW
 
+As both our front and back ends are deployed to heroku, please allow additional time for the servers to spin up when you visit for the first time. The backend will not start until first API call (signin/up) is made.
+
+Demo Account:
+```
+  Username : demo
+  Password : demo
+```
+
 THE TEAM
 
 We are a team of US Military Veterans who are Full Stack Software Engineers. We all met during a non-profit bootcamp for veterans and military spouses. We recently graduated and came together to work on this project. We were all on different timezone and currently located in the United States, Canada and Switzerland. This made our daily stand ups more challenging. However, our time in our bootcamp gave us a good base to work off of as we were remote during the whole cohort due to COVID. This allowed us to easily work around each persons schedule and stay on track as a team. 
